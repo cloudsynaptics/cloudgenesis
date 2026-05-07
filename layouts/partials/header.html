@@ -1,0 +1,12 @@
+<header class="site-header">
+  <div class="container header-shell">
+    <a class="brand-mark" href="{{ `` | relURL }}" aria-label="{{ site.Title }} home">
+      <span class="brand-mark__badge" aria-hidden="true">CG</span>
+      <span class="brand-mark__copy">
+        <strong>{{ site.Params.siteName }}</strong>
+        <span>{{ site.Params.siteTagline }}</span>
+      </span>
+    </a>
+    {{ partial "nav.html" . }}
+  </div>
+</header>

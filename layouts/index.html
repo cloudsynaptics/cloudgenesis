@@ -1,0 +1,13 @@
+{{ define "main" }}
+  {{ $homePage := site.GetPage "section" "home" }}
+  {{ if $homePage }}
+    {{ partial "home-content.html" $homePage }}
+  {{ else }}
+    <section class="section">
+      <div class="container prose-block">
+        <h1>{{ site.Title }}</h1>
+        <p>{{ site.Params.siteDescription }}</p>
+      </div>
+    </section>
+  {{ end }}
+{{ end }}

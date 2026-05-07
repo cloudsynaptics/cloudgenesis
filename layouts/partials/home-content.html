@@ -1,0 +1,157 @@
+<section class="hero-section">
+  <div class="container hero-layout">
+    <div class="hero-copy animate-stagger">
+      <p class="section-kicker">Healthcare websites and secure digital platforms</p>
+      <h1>{{ .Params.hero_title }}</h1>
+      <p class="section-lead">{{ .Params.hero_text }}</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="{{ .Params.hero_primary_url | relURL }}">{{ .Params.hero_primary_label }}</a>
+        <a class="btn btn-secondary" href="{{ .Params.hero_secondary_url | relURL }}">{{ .Params.hero_secondary_label }}</a>
+      </div>
+      <span class="hero-note">Built to support secure launches and professional growth.</span>
+    </div>
+    <div class="visual-panel visual-panel--hero visual-panel--image">
+      <img
+        class="visual-panel__image"
+        src="{{ `/images/hero-healthcare-platform.webp` | relURL }}"
+        alt="Abstract healthcare platform visual showing secure web and mobile app interfaces for doctors and clinics."
+        width="1448"
+        height="1086"
+      >
+    </div>
+  </div>
+</section>
+
+<section class="logo-band">
+  <div class="container logo-band__shell reveal">
+    <ul class="logo-cloud" aria-hidden="true">
+      <li>Doc AIde</li>
+      <li>Clinic Platforms</li>
+      <li>Doctor Portfolios</li>
+      <li>Healthcare Apps</li>
+    </ul>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-heading reveal">
+      <p class="section-kicker">{{ .Params.overview_title }}</p>
+      <h2>The essential services for healthcare digital transformation</h2>
+      <p class="section-lead">{{ .Params.overview_text }}</p>
+    </div>
+    <div class="card-grid">
+      {{ range $index, $service := .Params.services }}
+        <article class="card reveal" data-reveal-delay="{{ mod $index 4 }}">
+          <span class="card-icon" aria-hidden="true">{{ $service.label }}</span>
+          <h3>{{ $service.title }}</h3>
+          <p>{{ $service.description }}</p>
+        </article>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+<section class="section section-soft">
+  <div class="container feature-split">
+    <div class="feature-split__copy reveal">
+      <p class="section-kicker">Built for healthcare professionals</p>
+      <h2>Created with trust & care for healthcare</h2>
+      <p class="section-lead">See how we shape reliable digital solutions for modern medical teams.</p>
+      <ul class="info-list">
+        <li>Privacy, compliance, and protection are considered from the first line of code.</li>
+        <li>Clean, refined interfaces that help patients and providers feel confident.</li>
+        <li>Flexible systems that can support more users, services, and locations over time.</li>
+      </ul>
+    </div>
+    <div class="feature-split__media showcase-media">
+      <img
+        class="showcase-media__image"
+        src="{{ `/images/feature-split-security.png` | relURL }}"
+        alt="Secure healthcare platform visual showing protected digital workflows for doctors and clinics."
+        width="1448"
+        height="1086"
+      >
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="alternating-row">
+      <div class="showcase-copy reveal">
+        <p class="section-kicker">{{ .Params.portfolio_title }}</p>
+        <h2>Healthcare success stories and featured work</h2>
+        <p class="section-lead">{{ .Params.portfolio_text }}</p>
+        <ul class="info-list">Secure digital platforms for modern healthcare practices.
+          <li>Explore how we enable healthcare practices to expand.</li>
+          <li>Doc AIde gives doctors the tools to launch their own branded apps.</li>
+        </ul>
+      </div>
+      <div class="showcase-media">
+        <img
+          class="showcase-media__image"
+          src="{{ `/images/feature-health-care-platform.png` | relURL }}"
+          alt="Healthcare platform visual showing web dashboards and mobile app interfaces for clinical workflows."
+          width="1448"
+          height="1086"
+        >
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-soft">
+  <div class="container">
+    <div class="section-heading reveal">
+      <p class="section-kicker">{{ .Params.value_title }}</p>
+      <h2>Trusted by those you trust</h2>
+      <p class="section-lead">{{ .Params.value_text }}</p>
+    </div>
+    <div class="testimonial-grid">
+      {{ range $index, $point := .Params.value_points }}
+        <article class="testimonial reveal" data-reveal-delay="{{ mod $index 3 }}">
+          <p>{{ $point.description }}</p>
+          <div class="testimonial__author">
+            <strong>{{ $point.title }}</strong>
+          </div>
+        </article>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-heading reveal">
+      <p class="section-kicker">Healthcare ecosystem partners</p>
+      <h2>Works with healthcare platforms and tools your practice uses</h2>
+      <p class="section-lead">CloudGenesis integrates with the systems and services you rely on.</p>
+    </div>
+    <ul class="tool-grid" aria-hidden="true">
+      <li class="tool-item reveal" data-reveal-delay="0">Healthcare Platforms</li>
+      <li class="tool-item reveal" data-reveal-delay="1">Clinic Tools</li>
+      <li class="tool-item reveal" data-reveal-delay="2">Patient Engagement</li>
+      <li class="tool-item reveal" data-reveal-delay="3">Data Security</li>
+      <li class="tool-item reveal" data-reveal-delay="0">API Integrations</li>
+      <li class="tool-item reveal" data-reveal-delay="1">App Publishing</li>
+      <li class="tool-item reveal" data-reveal-delay="2">Custom Solutions</li>
+      <li class="tool-item reveal" data-reveal-delay="3">Support Services</li>
+    </ul>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container cta-band reveal">
+    <div>
+      <p class="section-kicker">Ready to get started?</p>
+      <h2>Ready to build your digital healthcare platform?</h2>
+    </div>
+    <div>
+      <p>Let's discuss your healthcare website, clinic app, or consulting needs.</p>
+      <div class="hero-actions">
+        <a class="btn btn-secondary" href="{{ `/contactus/` | relURL }}">Book a Consultation</a>
+      </div>
+    </div>
+  </div>
+</section>

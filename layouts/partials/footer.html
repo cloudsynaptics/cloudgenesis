@@ -1,0 +1,24 @@
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <a class="brand-mark brand-mark--footer" href="{{ `` | relURL }}" aria-label="{{ site.Title }} home">
+        <span class="brand-mark__badge" aria-hidden="true">CG</span>
+        <span class="brand-mark__copy">
+          <strong>{{ site.Params.siteName }}</strong>
+          <span>{{ site.Params.siteTagline }}</span>
+        </span>
+      </a>
+      <p>{{ site.Params.siteDescription }}</p>
+    </div>
+    <nav aria-label="Footer">
+      <ul class="footer-links">
+        {{ range site.Menus.main }}
+          <li><a href="{{ .URL | relURL }}">{{ .Name }}</a></li>
+        {{ end }}
+      </ul>
+    </nav>
+  </div>
+  <div class="container footer-meta">
+    <p>&copy; {{ now.Year }} {{ site.Params.siteName }}. All rights reserved.</p>
+  </div>
+</footer>

@@ -1,0 +1,38 @@
+{{ $seoPage := . }}
+{{ if .IsHome }}
+  {{ with site.GetPage "section" "home" }}
+    {{ $seoPage = . }}
+  {{ end }}
+{{ end }}
+{{ $title := site.Title }}
+{{ if and $seoPage.Title (ne $seoPage.Title site.Title) }}
+  {{ $title = printf "%s | %s" $seoPage.Title site.Title }}
+{{ end }}
+{{ $description := or $seoPage.Params.description site.Params.siteDescription }}
+{{ $canonical := $seoPage.Permalink }}
+{{ if .IsHome }}
+  {{ $canonical = absURL site.Params.rootCanonical }}
+{{ end }}
+{{ $ogImage := absURL site.Params.ogImage }}
+{{ $styles := resources.Get "css/main.css" | minify | fingerprint }}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ $title }}</title>
+<meta name="description" content="{{ $description }}">
+<meta name="theme-color" content="#fbfbfd">
+<link rel="canonical" href="{{ $canonical }}">
+<meta property="og:site_name" content="{{ site.Title }}">
+<meta property="og:title" content="{{ $title }}">
+<meta property="og:description" content="{{ $description }}">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ $canonical }}">
+<meta property="og:image" content="{{ $ogImage }}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ $title }}">
+<meta name="twitter:description" content="{{ $description }}">
+<meta name="twitter:image" content="{{ $ogImage }}">
+<link rel="icon" type="image/svg+xml" href="{{ `favicon.svg` | relURL }}">
+<link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}">
+{{ with site.Params.turnstileSiteKey }}
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" defer></script>
+{{ end }}

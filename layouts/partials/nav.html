@@ -1,0 +1,31 @@
+{{ $currentPage := . }}
+<nav class="site-nav" aria-label="Primary">
+  <button
+    class="nav-toggle"
+    type="button"
+    aria-expanded="false"
+    aria-controls="site-nav-panel"
+    aria-label="Toggle navigation"
+    data-nav-toggle
+  >
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <div class="nav-panel" id="site-nav-panel" data-nav-panel>
+    <ul class="nav-list">
+      {{ range site.Menus.main }}
+        {{ $isActive := or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) (and (eq .Identifier "home") $currentPage.IsHome) }}
+        <li>
+          <a
+            class="nav-link{{ if $isActive }} is-active{{ end }}"
+            href="{{ .URL | relURL }}"
+            {{ if $isActive }}aria-current="page"{{ end }}
+          >
+            {{ .Name }}
+          </a>
+        </li>
+      {{ end }}
+    </ul>
+  </div>
+</nav>

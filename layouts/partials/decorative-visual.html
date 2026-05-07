@@ -1,0 +1,40 @@
+{{- $class := .class | default "showcase-media" -}}
+{{- $kind := .kind | default "showcase" -}}
+{{- $windows := .windows | default (slice) -}}
+{{- $blocks := .blocks | default (slice) -}}
+
+<div class="{{ $class }}" aria-hidden="true">
+  {{- if eq $kind "hero" }}
+    <div class="dashboard-illustration">
+      {{- range $window := $windows }}
+        <div class="dashboard-window{{ if $window.offset }} dashboard-window--offset{{ end }}">
+          {{- range $element := $window.elements }}
+            {{- if eq $element "bars" }}
+              <div class="window-bars"><span></span><span></span><span></span></div>
+            {{- else if eq $element "grid" }}
+              <div class="window-grid"><span></span><span></span><span></span></div>
+            {{- else if eq $element "lines" }}
+              <div class="window-lines"><span></span><span></span><span></span></div>
+            {{- end }}
+          {{- end }}
+        </div>
+      {{- end }}
+    </div>
+  {{- else }}
+    <div class="showcase-media__stack">
+      {{- range $block := $blocks }}
+        <div class="showcase-media__block{{ if $block.accent }} showcase-media__block--accent{{ end }}">
+          {{- range $element := $block.elements }}
+            {{- if eq $element "bars" }}
+              <div class="window-bars"><span></span><span></span><span></span></div>
+            {{- else if eq $element "grid" }}
+              <div class="window-grid"><span></span><span></span><span></span></div>
+            {{- else if eq $element "lines" }}
+              <div class="window-lines"><span></span><span></span><span></span></div>
+            {{- end }}
+          {{- end }}
+        </div>
+      {{- end }}
+    </div>
+  {{- end }}
+</div>

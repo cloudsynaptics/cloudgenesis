@@ -1,0 +1,17 @@
+{
+  "name": "cloudgenesis",
+  "version": "1.0.0",
+  "description": "This repository contains a custom Hugo scaffold for a light-themed, responsive company website with the required routes:",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.59.1",
+    "@types/node": "^25.6.0",
+    "playwright": "^1.59.1",
+    "wrangler": "^4.87.0"
+  }
+}

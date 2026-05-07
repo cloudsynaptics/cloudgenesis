@@ -1,0 +1,9 @@
+<section class="page-header">
+  <div class="container page-header__inner animate-stagger">
+    <p class="section-kicker">{{ .Params.kicker | default "Page overview" }}</p>
+    <h1>{{ .Title }}</h1>
+    {{ with or .Params.lead .Params.description }}
+      <p class="section-lead">{{ . }}</p>
+    {{ end }}
+  </div>
+</section>

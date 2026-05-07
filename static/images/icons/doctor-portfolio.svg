@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Doctor portfolio icon">
+  <g fill="none" stroke="#0071e3" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="26" y="22" width="76" height="84" rx="12"/>
+    <circle cx="54" cy="54" r="12"/>
+    <path d="M36 84c5-13 31-13 36 0"/>
+    <path d="M82 42v22"/>
+    <path d="M71 53h22"/>
+    <path d="M78 84c9 9 23 3 23-9"/>
+    <path d="M101 75c0-5-4-9-9-9"/>
+  </g>
+</svg>

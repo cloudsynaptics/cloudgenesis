@@ -1,0 +1,66 @@
+{{ define "main" }}
+  {{ partial "page-header.html" . }}
+
+  <section class="section">
+    <div class="container">
+      <div class="section-heading reveal">
+        <p class="section-kicker">Professional software consulting services</p>
+        <h2>Healthcare websites, apps, and digital platforms</h2>
+        <p class="section-lead">Explore the core digital services CloudGenesis offers for healthcare teams, clinics, and product-led practices.</p>
+      </div>
+      <div class="card-grid">
+        {{ range $index, $service := .Params.services }}
+          <article class="card reveal" data-reveal-delay="{{ mod $index 4 }}">
+            <span class="card-icon" aria-hidden="true">
+              {{ with $service.icon_path }}
+                <img src="{{ . | relURL }}" alt="">
+              {{ else }}
+                {{ $service.icon }}
+              {{ end }}
+            </span>
+            <h3>{{ $service.title }}</h3>
+            <p>{{ $service.description }}</p>
+          </article>
+        {{ end }}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="container">
+      <div class="section-heading reveal">
+        <p class="section-kicker">Process</p>
+        <h2>{{ .Params.process_title }}</h2>
+        <p class="section-lead">{{ .Params.process_text }}</p>
+      </div>
+      <div class="process-grid">
+        {{ range $index, $step := .Params.process_steps }}
+          <article class="process-step reveal" data-reveal-delay="{{ mod $index 4 }}">
+            <span class="process-step__number">{{ add $index 1 }}</span>
+            <h3>{{ $step.title }}</h3>
+            <p>{{ $step.description }}</p>
+          </article>
+        {{ end }}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container feature-split">
+      <div class="feature-split__copy reveal">
+        <p class="section-kicker">Delivery support</p>
+        <h2>Our approach to healthcare digital solutions</h2>
+        <p class="section-lead">CloudGenesis follows a structured, transparent approach to discovery, design, build, and launch.</p>
+      </div>
+      <div class="feature-split__media showcase-media">
+        <img
+          class="showcase-media__image"
+          src="{{ `/images/collaboration.png` | relURL }}"
+          alt="Healthcare professionals collaborating on a digital care platform."
+          width="1448"
+          height="1086"
+        >
+      </div>
+    </div>
+  </section>
+{{ end }}

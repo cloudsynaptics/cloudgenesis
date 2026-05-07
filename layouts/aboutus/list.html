@@ -1,0 +1,60 @@
+{{ define "main" }}
+  {{ partial "page-header.html" . }}
+
+  <section class="section">
+    <div class="container split-layout">
+      <div class="prose-block reveal">
+        {{ .Content }}
+      </div>
+      <div class="showcase-media">
+        <img
+          class="showcase-media__image"
+          src="{{ `/images/aboutus-png.png` | relURL }}"
+          alt="CloudGenesis team and healthcare technology visual for the About Us page."
+          width="1536"
+          height="1024"
+        >
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="container">
+      <div class="card-grid">
+        <article class="card reveal" data-reveal-delay="0">
+          <p class="card-meta">Mission</p>
+          <h2>{{ .Params.mission_title }}</h2>
+          <p>{{ .Params.mission_text }}</p>
+        </article>
+        <article class="card reveal" data-reveal-delay="1">
+          <p class="card-meta">Vision</p>
+          <h2>{{ .Params.vision_title }}</h2>
+          <p>{{ .Params.vision_text }}</p>
+        </article>
+        <article class="card reveal" data-reveal-delay="2">
+          <p class="card-meta">Values</p>
+          <h2>{{ .Params.values_title }}</h2>
+          <p>{{ .Params.values_text }}</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-heading reveal">
+        <p class="section-kicker">Principles</p>
+        <h2>How we work with healthcare partners</h2>
+        <p class="section-lead">CloudGenesis brings healthcare expertise, security-conscious engineering, and professional design to every project.</p>
+      </div>
+      <div class="card-grid">
+        {{ range $index, $principle := .Params.principles }}
+          <article class="card reveal" data-reveal-delay="{{ mod $index 3 }}">
+            <h3>{{ $principle.title }}</h3>
+            <p>{{ $principle.description }}</p>
+          </article>
+        {{ end }}
+      </div>
+    </div>
+  </section>
+{{ end }}

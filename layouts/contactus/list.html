@@ -1,0 +1,71 @@
+{{ define "main" }}
+  {{ partial "page-header.html" . }}
+
+  <section class="section">
+    <div class="container contact-layout">
+      <div class="contact-stack reveal">
+        <h2>Contact options</h2>
+        {{ range $index, $method := .Params.contact_methods }}
+          <article class="card contact-card reveal" data-reveal-delay="{{ mod $index 3 }}">
+            <p class="card-meta">{{ $method.label }}</p>
+            <h3>{{ $method.value }}</h3>
+            <p>{{ $method.detail }}</p>
+            <a class="text-link" href="{{ $method.href | safeURL }}">{{ $method.cta }}</a>
+          </article>
+        {{ end }}
+      </div>
+
+      <form
+        class="contact-form reveal"
+        action="{{ site.Params.contactApiUrl | default `#` }}"
+        method="post"
+        data-contact-form
+        data-contact-endpoint="{{ site.Params.contactApiUrl }}"
+        data-turnstile-site-key="{{ site.Params.turnstileSiteKey }}">
+        <div class="form-heading">
+          <p class="section-kicker">Contact form</p>
+          <h2>Get in touch with us</h2>
+          <p>Share your healthcare website, app, or consulting project details.</p>
+        </div>
+        <input type="hidden" name="submittedAt" value="">
+        <div class="form-field form-field--hidden" aria-hidden="true">
+          <label for="company">Company website</label>
+          <input id="company" name="company" type="text" tabindex="-1" autocomplete="off">
+        </div>
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" placeholder="Your name" autocomplete="name" minlength="2" maxlength="80" required>
+
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" placeholder="name@example.com" autocomplete="email" maxlength="120" required>
+
+        <label for="subject">Subject</label>
+        <input id="subject" name="subject" type="text" placeholder="How can we help?" minlength="4" maxlength="140" required>
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="6" placeholder="Tell us about your requirement" minlength="20" maxlength="2500" required></textarea>
+
+        {{ with site.Params.turnstileSiteKey }}
+          <div class="turnstile-field" data-turnstile-container></div>
+        {{ end }}
+        <p class="form-note">This form is protected by validation and abuse-prevention checks. Please avoid sharing sensitive medical or patient information.</p>
+        <p class="form-status" data-contact-status role="status" aria-live="polite"></p>
+        <button class="btn btn-primary" type="submit">Send inquiry</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="container cta-band reveal">
+      <div>
+        <p class="section-kicker">Professional contact CTA</p>
+        <h2>{{ .Params.cta_title }}</h2>
+      </div>
+      <div class="cta-band__actions">
+        <p>{{ .Params.cta_text }}</p>
+        {{ with .Params.cta_href }}
+          <a class="btn btn-secondary" href="{{ . | safeURL }}">{{ $.Params.cta_label | default "Start the conversation" }}</a>
+        {{ end }}
+      </div>
+    </div>
+  </section>
+{{ end }}

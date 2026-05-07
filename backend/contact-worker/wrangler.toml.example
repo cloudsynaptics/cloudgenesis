@@ -1,0 +1,20 @@
+name = "cloudgenesis-contact"
+main = "src/worker.js"
+compatibility_date = "2026-05-02"
+
+# Deploy this Worker separately from GitHub Pages, then set
+# params.contactApiUrl in hugo.toml to the deployed Worker endpoint.
+
+[vars]
+ALLOWED_ORIGINS = "https://your-github-pages-domain.example"
+CONTACT_TO_EMAIL = "contactus@cloudgenesis.in"
+CONTACT_FROM_EMAIL = "CloudGenesis <contact@your-verified-domain.example>"
+SUBJECT_PREFIX = "CloudGenesis inquiry"
+
+# Optional but recommended for IP-based rate limiting.
+# Create with:
+# wrangler kv namespace create CONTACT_RATE_LIMIT
+#
+# [[kv_namespaces]]
+# binding = "CONTACT_RATE_LIMIT"
+# id = "replace-with-kv-namespace-id"

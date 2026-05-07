@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Clinic management icon">
+  <g fill="none" stroke="#0071e3" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="24" y="28" width="80" height="78" rx="12"/>
+    <path d="M24 50h80"/>
+    <path d="M44 22v16"/>
+    <path d="M84 22v16"/>
+    <path d="M42 72l9 9 17-18"/>
+    <path d="M78 70h14"/>
+    <path d="M78 88h14"/>
+  </g>
+</svg>

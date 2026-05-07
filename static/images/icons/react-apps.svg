@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Web application icon">
+  <g fill="none" stroke="#0071e3" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="20" y="26" width="88" height="76" rx="12"/>
+    <path d="M20 48h88"/>
+    <rect x="34" y="62" width="22" height="22" rx="4"/>
+    <rect x="72" y="62" width="22" height="22" rx="4"/>
+    <path d="M56 73h16"/>
+    <circle cx="45" cy="73" r="2"/>
+    <circle cx="83" cy="73" r="2"/>
+    <path d="M38 38h1"/>
+    <path d="M52 38h1"/>
+  </g>
+</svg>

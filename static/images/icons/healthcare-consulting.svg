@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Healthcare consulting icon">
+  <g fill="none" stroke="#0071e3" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M64 18c20 8 34 8 34 8v28c0 25-15 43-34 56-19-13-34-31-34-56V26s14 0 34-8Z"/>
+    <path d="M64 43v28"/>
+    <path d="M50 57h28"/>
+    <path d="M38 96l-12 12"/>
+    <path d="M90 96l12 12"/>
+    <path d="M42 104h44"/>
+  </g>
+</svg>

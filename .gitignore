@@ -1,0 +1,44 @@
+/public/
+/resources/_gen/
+/.hugo_build.lock
+/.DS_Store
+.DS_Store
+
+# Playwright
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
+/.playwright-mcp/
+/coverage/
+/screenshots/
+
+# Env/secrets
+.env
+.env.*
+!.env.example
+*.local
+.dev.vars
+.dev.vars.*
+
+# Cloudflare Worker local config/cache
+/backend/contact-worker/wrangler.toml
+/backend/contact-worker/.wrangler/
+/.wrangler-config/
+.wrangler/
+
+# Local planning / agent notes
+/AGENT.md
+/IMAGE_ASSET_SIZES.md
+/cloudgenesis_codex_md_tasks/
+/commands
+
+# Public repo docs not required by the Hugo build
+/README.md
+/backend/contact-worker/README.md

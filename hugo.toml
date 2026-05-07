@@ -1,0 +1,47 @@
+baseURL = "https://cloudgenesis.in/"
+languageCode = "en-us"
+title = "CloudGenesis"
+enableRobotsTXT = true
+disableKinds = ["taxonomy", "term", "RSS"]
+
+[caches]
+  [caches.images]
+    dir = ":cacheDir/images"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = false
+
+[params]
+  siteName = "CloudGenesis"
+  siteDescription = "Secure digital platforms for healthcare professionals, doctors, clinics, and healthcare businesses."
+  siteTagline = "Secure digital platforms for modern healthcare practices."
+  ogImage = "/images/og-cloudgenesis.png"
+  rootCanonical = "/home/"
+  contactApiUrl = "https://cloudgenesis-contact.contactus-8de.workers.dev"
+  turnstileSiteKey = ""
+
+[[menus.main]]
+  identifier = "home"
+  name = "Home"
+  pageRef = "/home"
+  weight = 10
+
+[[menus.main]]
+  identifier = "aboutus"
+  name = "About Us"
+  pageRef = "/aboutus"
+  weight = 20
+
+[[menus.main]]
+  identifier = "services"
+  name = "Services"
+  pageRef = "/services"
+  weight = 30
+
+[[menus.main]]
+  identifier = "contactus"
+  name = "Contact Us"
+  pageRef = "/contactus"
+  weight = 50
