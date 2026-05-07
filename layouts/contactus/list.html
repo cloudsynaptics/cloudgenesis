@@ -3,18 +3,6 @@
 
   <section class="section">
     <div class="container contact-layout">
-      <div class="contact-stack reveal">
-        <h2>Contact options</h2>
-        {{ range $index, $method := .Params.contact_methods }}
-          <article class="card contact-card reveal" data-reveal-delay="{{ mod $index 3 }}">
-            <p class="card-meta">{{ $method.label }}</p>
-            <h3>{{ $method.value }}</h3>
-            <p>{{ $method.detail }}</p>
-            <a class="text-link" href="{{ $method.href | safeURL }}">{{ $method.cta }}</a>
-          </article>
-        {{ end }}
-      </div>
-
       <form
         class="contact-form reveal"
         action="{{ site.Params.contactApiUrl | default `#` }}"
@@ -32,25 +20,52 @@
           <label for="company">Company website</label>
           <input id="company" name="company" type="text" tabindex="-1" autocomplete="off">
         </div>
-        <label for="name">Name</label>
-        <input id="name" name="name" type="text" placeholder="Your name" autocomplete="name" minlength="2" maxlength="80" required>
+        <div class="contact-form__grid">
+          <div class="form-field">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" placeholder="Your name" autocomplete="name" minlength="2" maxlength="80" required>
+          </div>
 
-        <label for="email">Email</label>
-        <input id="email" name="email" type="email" placeholder="name@example.com" autocomplete="email" maxlength="120" required>
+          <div class="form-field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="name@example.com" autocomplete="email" maxlength="120" required>
+          </div>
 
-        <label for="subject">Subject</label>
-        <input id="subject" name="subject" type="text" placeholder="How can we help?" minlength="4" maxlength="140" required>
+          <div class="form-field form-field--wide">
+            <label for="subject">Subject</label>
+            <input id="subject" name="subject" type="text" placeholder="How can we help?" minlength="4" maxlength="140" required>
+          </div>
 
-        <label for="message">Message</label>
-        <textarea id="message" name="message" rows="6" placeholder="Tell us about your requirement" minlength="20" maxlength="2500" required></textarea>
+          <div class="form-field form-field--wide">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="7" placeholder="Tell us about your requirement" minlength="20" maxlength="2500" required></textarea>
+          </div>
 
-        {{ with site.Params.turnstileSiteKey }}
-          <div class="turnstile-field" data-turnstile-container></div>
-        {{ end }}
-        <p class="form-note">This form is protected by validation and abuse-prevention checks. Please avoid sharing sensitive medical or patient information.</p>
-        <p class="form-status" data-contact-status role="status" aria-live="polite"></p>
-        <button class="btn btn-primary" type="submit">Send inquiry</button>
+          {{ with site.Params.turnstileSiteKey }}
+            <div class="form-field form-field--wide">
+              <div class="turnstile-field" aria-label="Cloudflare human verification" data-turnstile-container></div>
+            </div>
+          {{ end }}
+
+          <p class="form-note form-field--wide">This form is protected by validation and abuse-prevention checks. Please avoid sharing sensitive medical or patient information.</p>
+          <p class="form-status form-field--wide" data-contact-status role="status" aria-live="polite"></p>
+          <button class="btn btn-primary form-field--wide" type="submit">Send inquiry</button>
+        </div>
       </form>
+
+      <div class="contact-options reveal">
+        <h2>Contact options</h2>
+        <div class="contact-stack">
+          {{ range $index, $method := .Params.contact_methods }}
+            <article class="card contact-card reveal" data-reveal-delay="{{ mod $index 3 }}">
+              <p class="card-meta">{{ $method.label }}</p>
+              <h3>{{ $method.value }}</h3>
+              <p>{{ $method.detail }}</p>
+              <a class="text-link" href="{{ $method.href | safeURL }}">{{ $method.cta }}</a>
+            </article>
+          {{ end }}
+        </div>
+      </div>
     </div>
   </section>
 

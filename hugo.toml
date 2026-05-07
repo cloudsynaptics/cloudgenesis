@@ -20,7 +20,7 @@ disableKinds = ["taxonomy", "term", "RSS"]
   ogImage = "/images/og-cloudgenesis.png"
   rootCanonical = "/home/"
   contactApiUrl = "https://cloudgenesis-contact.contactus-8de.workers.dev"
-  turnstileSiteKey = ""
+  turnstileSiteKey = "0x4AAAAAADK3dfKQf0s9_F_d"
 
 [[menus.main]]
   identifier = "home"

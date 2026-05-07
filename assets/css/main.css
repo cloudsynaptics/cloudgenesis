@@ -843,10 +843,6 @@ p {
   gap: var(--space-4);
 }
 
-.contact-layout .contact-stack {
-  grid-template-columns: minmax(0, 1fr);
-}
-
 .card,
 .process-step,
 .testimonial,
@@ -1057,13 +1053,39 @@ p {
   min-height: 0;
 }
 
+.contact-layout {
+  align-items: start;
+  gap: clamp(2rem, 4vw, 3.5rem);
+}
+
+.contact-form {
+  width: min(100%, 64rem);
+  justify-self: center;
+  padding: clamp(1.5rem, 3.5vw, 3rem);
+}
+
 .contact-form {
   display: grid;
-  gap: 0.9rem;
+  gap: var(--space-4);
+}
+
+.contact-form__grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.form-field {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.form-heading {
+  max-width: 42rem;
 }
 
 .contact-form label {
   font-weight: 700;
+  line-height: 1.2;
 }
 
 .contact-form input,
@@ -1084,7 +1106,12 @@ p {
 }
 
 .contact-form textarea {
+  min-height: 13rem;
   resize: vertical;
+}
+
+.form-field--wide {
+  grid-column: 1 / -1;
 }
 
 .form-field--hidden {
@@ -1121,7 +1148,29 @@ p {
 }
 
 .turnstile-field {
-  min-height: 4rem;
+  display: flex;
+  min-height: 4.4rem;
+  align-items: center;
+  overflow-x: auto;
+}
+
+.contact-options {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.contact-options > h2 {
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+}
+
+.contact-card {
+  min-height: 100%;
+}
+
+.contact-card .text-link {
+  align-self: end;
+  justify-self: start;
+  margin-top: auto;
 }
 
 .cta-band {
@@ -1266,6 +1315,10 @@ p {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .contact-form__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .footer-grid,
   .cta-band {
     grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
@@ -1275,7 +1328,6 @@ p {
 @media (min-width: 56rem) {
   .hero-layout,
   .split-layout,
-  .contact-layout,
   .feature-split,
   .alternating-row {
     grid-template-columns: repeat(2, minmax(0, 1fr));
