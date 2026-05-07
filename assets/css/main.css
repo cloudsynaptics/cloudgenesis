@@ -423,6 +423,14 @@ body.reveal-enabled .reveal[data-reveal-delay="4"] {
   padding: var(--space-7) 0;
 }
 
+.page-header {
+  padding-bottom: var(--space-5);
+}
+
+.page-header + .section {
+  padding-top: var(--space-4);
+}
+
 .section-soft {
   background: var(--gradient-surface);
 }
@@ -1247,6 +1255,14 @@ p {
     display: none;
   }
 
+  .page-header {
+    padding: var(--space-6) 0 var(--space-4);
+  }
+
+  .page-header + .section {
+    padding-top: var(--space-3);
+  }
+
   .hero-section {
     padding: var(--space-6) 0 var(--space-5);
   }
@@ -1339,6 +1355,14 @@ p {
   .section,
   .page-header {
     padding: var(--space-8) 0;
+  }
+
+  .page-header {
+    padding-bottom: var(--space-5);
+  }
+
+  .page-header + .section {
+    padding-top: var(--space-5);
   }
 
   .nav-toggle {
