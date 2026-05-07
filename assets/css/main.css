@@ -701,8 +701,13 @@ p {
   object-fit: cover;
 }
 
-.visual-panel__image,
 .showcase-media__image {
+  height: auto;
+  min-height: 0;
+  object-fit: contain;
+}
+
+.visual-panel__image {
   min-height: inherit;
 }
 
@@ -833,6 +838,8 @@ p {
   border-radius: 999px;
   background: var(--color-surface-muted);
   font-weight: 700;
+  text-align: center;
+  line-height: 1.25;
   transition: background var(--transition), color var(--transition), transform var(--transition);
 }
 
@@ -1273,6 +1280,27 @@ p {
 
   .visual-panel--hero {
     padding: var(--space-3);
+  }
+
+  .showcase-media,
+  .feature-split__media {
+    min-height: 0;
+  }
+
+  .showcase-media__image {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+  }
+
+  .visual-panel--image {
+    min-height: 0;
+  }
+
+  .visual-panel--image .visual-panel__image {
+    height: auto;
+    min-height: 0;
+    object-fit: contain;
   }
 
   .dashboard-illustration {
