@@ -512,9 +512,8 @@ p {
 .footer-brand p,
 .footer-meta p,
 .info-list li {
-  hyphens: auto;
-  text-align: justify;
-  text-align-last: left;
+  hyphens: manual;
+  text-align: left;
 }
 
 .btn,
@@ -1023,6 +1022,39 @@ p {
   display: grid;
   gap: var(--space-3);
   max-width: 42rem;
+}
+
+.about-intro {
+  gap: clamp(2rem, 5vw, 4.5rem);
+}
+
+.about-intro__copy {
+  align-content: center;
+  max-width: 38rem;
+}
+
+.about-intro__copy h2 {
+  max-width: 13ch;
+  font-size: clamp(2rem, 3.8vw, 3rem);
+  line-height: 1.04;
+}
+
+.about-intro__copy p {
+  text-align: left;
+  text-align-last: auto;
+  hyphens: manual;
+}
+
+.about-intro__copy > p {
+  max-width: 34rem;
+  color: var(--color-muted);
+  font-size: clamp(1rem, 1.05vw, 1.08rem);
+  line-height: 1.72;
+}
+
+.about-intro__media {
+  aspect-ratio: 1.48 / 1;
+  min-height: 0;
 }
 
 .contact-form {

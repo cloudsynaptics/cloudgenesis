@@ -4,7 +4,7 @@ title = "CloudGenesis"
 enableRobotsTXT = true
 disableKinds = ["taxonomy", "term", "RSS"]
 
-[caches]
+[caches]git branch -M main
   [caches.images]
     dir = ":cacheDir/images"
 

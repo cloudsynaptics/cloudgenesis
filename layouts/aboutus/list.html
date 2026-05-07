@@ -2,11 +2,15 @@
   {{ partial "page-header.html" . }}
 
   <section class="section">
-    <div class="container split-layout">
-      <div class="prose-block reveal">
+    <div class="container split-layout about-intro">
+      <div class="prose-block about-intro__copy reveal">
+        <h2>{{ .Params.intro_title | default "About CloudGenesis" }}</h2>
+        {{ with .Params.intro_text }}
+          <p>{{ . }}</p>
+        {{ end }}
         {{ .Content }}
       </div>
-      <div class="showcase-media">
+      <div class="showcase-media about-intro__media reveal" data-reveal-delay="1">
         <img
           class="showcase-media__image"
           src="{{ `/images/aboutus-png.png` | relURL }}"
