@@ -850,6 +850,7 @@ p {
 }
 
 .card-grid,
+.pricing-grid,
 .process-grid,
 .testimonial-grid,
 .tool-grid,
@@ -859,6 +860,7 @@ p {
 }
 
 .card,
+.pricing-card,
 .process-step,
 .testimonial,
 .contact-card {
@@ -868,6 +870,7 @@ p {
 }
 
 .card:hover,
+.pricing-card:hover,
 .process-step:hover,
 .testimonial:hover,
 .contact-card:hover {
@@ -878,6 +881,7 @@ p {
 
 .card h2,
 .card h3,
+.pricing-card h3,
 .process-step h3,
 .testimonial h3,
 .contact-card h2,
@@ -887,6 +891,7 @@ p {
 }
 
 .card,
+.pricing-card,
 .process-step,
 .testimonial,
 .tool-item,
@@ -896,6 +901,101 @@ p {
 .cta-band {
   border-radius: var(--radius-lg);
   padding: var(--space-4);
+}
+
+.pricing-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-card);
+  transition:
+    transform var(--motion-medium) var(--ease-out),
+    border-color var(--transition),
+    box-shadow var(--motion-medium) var(--ease-out),
+    background var(--transition);
+}
+
+.pricing-card__header {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.pricing-card__price {
+  margin: var(--space-1) 0 0;
+  padding: 0.95rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-muted);
+  color: var(--color-accent-deep);
+  font-family: var(--font-heading);
+  font-size: clamp(1.18rem, 1.55vw, 1.45rem);
+  font-weight: 700;
+  line-height: 1.18;
+  text-align: center;
+}
+
+.pricing-card__currency {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.45rem;
+}
+
+.pricing-card__currency-button {
+  min-height: 2.2rem;
+  padding: 0.45rem 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-surface-muted);
+  color: var(--color-muted);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  transition:
+    background var(--transition),
+    border-color var(--transition),
+    color var(--transition),
+    transform var(--transition);
+}
+
+.pricing-card__currency-button:hover {
+  transform: translateY(-1px);
+  border-color: var(--color-border-strong);
+  color: var(--color-accent-deep);
+}
+
+.pricing-card__currency-button.is-active {
+  border-color: var(--color-accent-deep);
+  background: var(--color-accent-deep);
+  color: var(--color-inverse);
+}
+
+.pricing-card__features {
+  display: grid;
+  gap: 0.7rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pricing-card__features li {
+  position: relative;
+  padding-left: 1.35rem;
+  color: var(--color-muted);
+}
+
+.pricing-card__features li::before {
+  content: "";
+  position: absolute;
+  top: 0.72em;
+  left: 0;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 999px;
+  background: var(--color-secondary);
+}
+
+.pricing-card__cta {
+  margin-top: auto;
 }
 
 .card-icon,
@@ -1417,6 +1517,11 @@ p {
 
   .card-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .pricing-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: stretch;
   }
 
   .process-grid {

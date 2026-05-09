@@ -1,0 +1,18 @@
+{{ define "main" }}
+  {{ partial "page-header.html" . }}
+  {{ partial "pricing-packages.html" (dict
+    "kicker" .Params.kicker
+    "title" (.Params.pricing_title | default .Title)
+    "subtitle" .Params.pricing_subtitle
+    "packages" .Params.packages
+  ) }}
+  {{ with .Params.doc_aide_pricing }}
+    {{ partial "pricing-packages.html" (dict
+      "kicker" .kicker
+      "title" .title
+      "subtitle" .subtitle
+      "packages" .packages
+      "sectionClass" "section section-soft"
+    ) }}
+  {{ end }}
+{{ end }}

@@ -1,0 +1,42 @@
+{{ $sectionClass := .sectionClass | default "section" }}
+<section class="{{ $sectionClass }}">
+  <div class="container">
+    <div class="section-heading reveal">
+      <p class="section-kicker">{{ .kicker | default "Pricing" }}</p>
+      <h2>{{ .title }}</h2>
+      {{ with .subtitle }}
+        <p class="section-lead">{{ . }}</p>
+      {{ end }}
+    </div>
+    <div class="pricing-grid">
+      {{ range $index, $package := .packages }}
+        <article class="pricing-card reveal" data-reveal-delay="{{ mod $index 3 }}">
+          <div class="pricing-card__header">
+            <p class="card-meta">Best for {{ $package.best_for }}</p>
+            <h3>{{ $package.name }}</h3>
+          </div>
+          <p
+            class="pricing-card__price"
+            data-price-display
+            data-price-inr="{{ $package.price }}"
+            data-price-usd="{{ $package.price_usd }}"
+            data-price-euro="{{ $package.price_euro }}"
+            data-price-aed="{{ $package.price_aed }}"
+          >{{ $package.price }}</p>
+          <div class="pricing-card__currency" aria-label="Change currency for {{ $package.name }}">
+            <button class="pricing-card__currency-button is-active" type="button" data-pricing-currency="INR" aria-pressed="true">INR</button>
+            <button class="pricing-card__currency-button" type="button" data-pricing-currency="USD" aria-pressed="false">USD</button>
+            <button class="pricing-card__currency-button" type="button" data-pricing-currency="EURO" aria-pressed="false">EURO</button>
+            <button class="pricing-card__currency-button" type="button" data-pricing-currency="AED" aria-pressed="false">AED</button>
+          </div>
+          <ul class="pricing-card__features" aria-label="{{ $package.name }} features">
+            {{ range $package.features }}
+              <li>{{ . }}</li>
+            {{ end }}
+          </ul>
+          <a class="btn btn-primary pricing-card__cta" href="{{ printf `contactus/?package=%s` $package.slug | relURL }}">Get Package</a>
+        </article>
+      {{ end }}
+    </div>
+  </div>
+</section>

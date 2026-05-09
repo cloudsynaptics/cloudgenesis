@@ -6,7 +6,7 @@ compatibility_date = "2026-05-02"
 # params.contactApiUrl in hugo.toml to the deployed Worker endpoint.
 
 [vars]
-ALLOWED_ORIGINS = "https://your-github-pages-domain.example"
+ALLOWED_ORIGINS = "https://cloudgenesis.in,https://www.cloudgenesis.in"
 CONTACT_TO_EMAIL = "contactus@cloudgenesis.in"
 CONTACT_FROM_EMAIL = "CloudGenesis <contact@your-verified-domain.example>"
 SUBJECT_PREFIX = "CloudGenesis inquiry"

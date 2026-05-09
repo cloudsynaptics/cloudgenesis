@@ -3,6 +3,28 @@
 
   <section class="section">
     <div class="container contact-layout">
+      {{ $packagePrefillItems := slice }}
+      {{ with site.GetPage "section" "pricing" }}
+        {{ range .Params.packages }}
+          {{ $packagePrefillItems = $packagePrefillItems | append (dict
+            "slug" .slug
+            "name" .name
+            "bestFor" .best_for
+            "features" .features
+          ) }}
+        {{ end }}
+        {{ with .Params.doc_aide_pricing }}
+          {{ range .packages }}
+            {{ $packagePrefillItems = $packagePrefillItems | append (dict
+              "slug" .slug
+              "name" .name
+              "bestFor" .best_for
+              "features" .features
+            ) }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+      <script type="application/json" data-package-prefill>{{ $packagePrefillItems | jsonify | safeJS }}</script>
       <form
         class="contact-form reveal"
         action="{{ site.Params.contactApiUrl | default `#` }}"

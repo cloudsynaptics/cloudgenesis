@@ -10,6 +10,7 @@
       {{ block "main" . }}{{ end }}
     </main>
     {{ partial "footer.html" . }}
-    <script src="{{ `js/main.js` | relURL }}" defer></script>
+    {{ $mainScriptVersion := readFile "static/js/main.js" | sha256 }}
+    <script src="{{ printf `js/main.js?v=%s` $mainScriptVersion | relURL }}" defer></script>
   </body>
 </html>

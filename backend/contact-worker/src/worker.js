@@ -5,6 +5,10 @@ const JSON_HEADERS = {
 const MAX_BODY_BYTES = 24 * 1024;
 const RATE_LIMIT_WINDOW_SECONDS = 60 * 60;
 const RATE_LIMIT_MAX_REQUESTS = 5;
+const DEFAULT_ALLOWED_ORIGINS = [
+  "https://cloudgenesis.in",
+  "https://www.cloudgenesis.in",
+];
 
 const fieldLimits = {
   name: { min: 2, max: 80 },
@@ -108,12 +112,13 @@ export default {
 
 function getCorsHeaders(request, env) {
   const origin = request.headers.get("Origin") || "";
-  const allowedOrigins = String(env.ALLOWED_ORIGINS || "")
+  const configuredOrigins = String(env.ALLOWED_ORIGINS || "")
     .split(",")
     .map((item) => item.trim())
     .filter(Boolean);
+  const allowedOrigins = new Set([...DEFAULT_ALLOWED_ORIGINS, ...configuredOrigins]);
 
-  if (!origin || !allowedOrigins.includes(origin)) {
+  if (!origin || !allowedOrigins.has(origin)) {
     return null;
   }
 
