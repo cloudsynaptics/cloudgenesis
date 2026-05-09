@@ -13,6 +13,7 @@ const DEFAULT_ALLOWED_ORIGINS = [
 const fieldLimits = {
   name: { min: 2, max: 80 },
   email: { min: 5, max: 120 },
+  phone: { min: 7, max: 24 },
   subject: { min: 4, max: 140 },
   message: { min: 20, max: 2500 },
 };
@@ -146,6 +147,7 @@ function normalizePayload(payload) {
   return {
     name: normalizeText(payload.name),
     email: normalizeText(payload.email).toLowerCase(),
+    phone: normalizeText(payload.phone),
     subject: normalizeText(payload.subject),
     message: normalizeText(payload.message),
     company: normalizeText(payload.company),
@@ -176,6 +178,10 @@ function validatePayload(payload) {
 
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(payload.email)) {
     errors.push("Please enter a valid email address.");
+  }
+
+  if (!/^\+?[0-9][0-9\s().-]{5,22}[0-9]$/.test(payload.phone)) {
+    errors.push("Please enter a valid phone number.");
   }
 
   if (/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/.test(payload.message)) {
@@ -293,6 +299,7 @@ function buildTextEmail(payload, meta) {
     "",
     `Name: ${payload.name}`,
     `Email: ${payload.email}`,
+    `Phone: ${payload.phone}`,
     `Subject: ${payload.subject}`,
     "",
     "Message:",
@@ -311,6 +318,7 @@ function buildHtmlEmail(payload, meta) {
     <h2>New CloudGenesis contact inquiry</h2>
     <p><strong>Name:</strong> ${escapeHtml(payload.name)}</p>
     <p><strong>Email:</strong> ${escapeHtml(payload.email)}</p>
+    <p><strong>Phone:</strong> ${escapeHtml(payload.phone)}</p>
     <p><strong>Subject:</strong> ${escapeHtml(payload.subject)}</p>
     <h3>Message</h3>
     <p>${escapeHtml(payload.message).replace(/\n/g, "<br>")}</p>

@@ -1,0 +1,14 @@
+{{ define "main" }}
+  <section class="section">
+    <div class="container cta-band reveal thank-you-panel">
+      <div>
+        <p class="section-kicker">Inquiry received</p>
+        <h1>{{ .Title }}</h1>
+      </div>
+      <div class="cta-band__actions">
+        <p>{{ .Params.lead }}</p>
+        <a class="btn btn-secondary" href="{{ `` | relURL }}">Back to Home</a>
+      </div>
+    </div>
+  </section>
+{{ end }}

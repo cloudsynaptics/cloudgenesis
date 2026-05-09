@@ -198,6 +198,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const payload = {
         name: String(formData.get("name") || ""),
         email: String(formData.get("email") || ""),
+        phone: String(formData.get("phone") || ""),
         subject: String(formData.get("subject") || ""),
         message: String(formData.get("message") || ""),
         company: String(formData.get("company") || ""),
@@ -233,6 +234,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         resetTurnstile();
         setStatus("Thanks. Your inquiry has been sent.", "success");
+        window.location.assign("/thank-you/");
       } catch (error) {
         const isNetworkError = error instanceof TypeError;
         const message = isNetworkError

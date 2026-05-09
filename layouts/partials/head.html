@@ -22,6 +22,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{ $title }}</title>
 <meta name="description" content="{{ $description }}">
+{{ if $seoPage.Params.private_page }}
+  <meta name="robots" content="noindex, nofollow">
+{{ end }}
 <meta name="theme-color" content="#fbfbfd">
 <link rel="canonical" href="{{ $canonical }}">
 <meta property="og:site_name" content="{{ site.Title }}">
