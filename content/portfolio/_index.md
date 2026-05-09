@@ -1,10 +1,10 @@
 +++
-title = "Our Portfolio"
+title = "Healthcare Software Portfolio"
 draft = true
-description = "Explore CloudGenesis work, including Doc AIde, a branded healthcare app platform designed with security-first principles for doctors and clinics."
-lead = "A look at products and platforms shaped by CloudGenesis."
+description = "Explore CloudGenesis healthcare software work, including Doc AIde, branded clinic apps, doctor portfolio websites, and secure web portals."
+lead = "A look at healthcare products and digital platforms shaped by CloudGenesis."
 future_title = "Future Case Studies"
-future_text = "We're building a portfolio of healthcare digital transformation projects. Explore our featured projects and contact us to discuss how we can help your practice."
+future_text = "We're building a focused portfolio of healthcare website, mobile app, and digital transformation projects. Contact us to discuss how we can help your practice."
 
 [[projects]]
 title = "Doc AIde"

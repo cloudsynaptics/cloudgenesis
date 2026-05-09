@@ -1,7 +1,7 @@
 +++
-title = "Services | Websites, Mobile Apps, and Healthcare Software"
-description = "Explore CloudGenesis services including company websites, doctor portfolio websites, clinic management apps, Flutter apps, React applications, and healthcare product consulting."
-lead = "CloudGenesis provides professional software consulting services for healthcare-focused digital solutions, including modern medical websites, doctor portfolio pages, clinic mobile applications, and secure healthcare platforms. We help doctors, clinics, and healthcare-led businesses create reliable digital products that look professional, function smoothly. Our services combine clean design and security-focused development to deliver solutions that are easy to manage and built for real-world healthcare needs."
+title = "Healthcare Software Development Services"
+description = "Explore healthcare website design, doctor portfolio websites, clinic management apps, Flutter mobile apps, React portals, and product consulting."
+lead = "CloudGenesis provides professional software consulting services for healthcare-focused digital solutions, including medical website design, doctor portfolio pages, clinic mobile applications, and secure healthcare platforms. We help doctors, clinics, and healthcare-led businesses create reliable digital products that look professional, function smoothly, and support patient engagement. Our services combine clean design and security-focused development to deliver solutions that are easy to manage and built for real-world healthcare needs."
 process_title = "Our Project Process"
 process_text = "We follow a structured, transparent approach to discovery, design, build, and launch, with ongoing support to ensure your platform grows with your practice."
 
@@ -58,4 +58,6 @@ title = "Launch and Improve"
 description = "We launch your platform, provide support, and continuously improve based on user feedback and analytics."
 +++
 
-Replace this with final content later.
+CloudGenesis helps healthcare organizations plan, design, build, and launch digital platforms with the clarity and care medical teams need. Whether you need a clinic website, a personal doctor portfolio, a patient-facing mobile app, or a secure React web application for internal operations, we focus on practical workflows, polished presentation, and dependable engineering.
+
+Our healthcare software development services are shaped around trust, usability, and long-term maintainability. We work with doctors, clinics, and healthcare-led businesses to create platforms that communicate expertise, simplify patient interaction, and support growth without adding unnecessary operational complexity.

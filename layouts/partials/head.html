@@ -5,13 +5,16 @@
   {{ end }}
 {{ end }}
 {{ $title := site.Title }}
-{{ if and $seoPage.Title (ne $seoPage.Title site.Title) }}
+{{ if and $seoPage.Title (ne $seoPage.Title site.Title) (not (in $seoPage.Title site.Title)) }}
   {{ $title = printf "%s | %s" $seoPage.Title site.Title }}
+{{ else if $seoPage.Title }}
+  {{ $title = $seoPage.Title }}
 {{ end }}
 {{ $description := or $seoPage.Params.description site.Params.siteDescription }}
 {{ $canonical := $seoPage.Permalink }}
 {{ if .IsHome }}
-  {{ $canonical = absURL site.Params.rootCanonical }}
+  {{ $rootCanonical := site.Params.rootCanonical | default "/" }}
+  {{ $canonical = cond (hasPrefix $rootCanonical "http") $rootCanonical (absURL $rootCanonical) }}
 {{ end }}
 {{ $ogImage := absURL site.Params.ogImage }}
 {{ $styles := resources.Get "css/main.css" | minify | fingerprint }}
@@ -31,8 +34,21 @@
 <meta name="twitter:title" content="{{ $title }}">
 <meta name="twitter:description" content="{{ $description }}">
 <meta name="twitter:image" content="{{ $ogImage }}">
+{{ with site.Params.googleSiteVerification }}
+  <meta name="google-site-verification" content="{{ . }}">
+{{ end }}
 <link rel="icon" type="image/svg+xml" href="{{ `favicon.svg` | relURL }}">
 <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}">
+{{ partial "seo-schema.html" (dict "Page" . "SeoPage" $seoPage "Title" $title "Description" $description "Canonical" $canonical "OgImage" $ogImage) }}
+{{ with site.Params.ga4MeasurementId }}
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ . }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{{ . }}');
+  </script>
+{{ end }}
 {{ with site.Params.turnstileSiteKey }}
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" defer></script>
 {{ end }}

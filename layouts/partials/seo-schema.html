@@ -1,0 +1,79 @@
+{{- $page := .Page -}}
+{{- $seoPage := .SeoPage -}}
+{{- $canonical := .Canonical -}}
+{{- $description := .Description -}}
+{{- $title := .Title -}}
+{{- $siteName := site.Params.siteName | default site.Title -}}
+{{- $baseURL := site.BaseURL | absURL -}}
+{{- $logo := "" -}}
+{{- with site.Params.logo -}}
+  {{- $logo = absURL . -}}
+{{- end -}}
+{{- $email := site.Params.email | default "" -}}
+{{- $telephone := site.Params.telephone | default "" -}}
+{{- $address := site.Params.address | default "" -}}
+{{- with site.GetPage "section" "contactus" -}}
+  {{- if not $email -}}
+    {{- range .Params.contact_methods -}}
+      {{- if and (not $email) (eq (lower .label) "email") -}}{{- $email = .value -}}{{- end -}}
+      {{- if and (not $telephone) (eq (lower .label) "phone") -}}{{- $telephone = .value -}}{{- end -}}
+      {{- if and (not $address) (eq (lower .label) "office") -}}{{- $address = .value -}}{{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- $org := dict
+  "@type" "Organization"
+  "@id" (printf "%s#organization" $baseURL)
+  "name" $siteName
+  "url" $baseURL
+  "description" (site.Params.siteDescription | default $description)
+-}}
+{{- with $logo -}}{{- $org = merge $org (dict "logo" .) -}}{{- end -}}
+{{- with $email -}}{{- $org = merge $org (dict "email" .) -}}{{- end -}}
+{{- with $telephone -}}{{- $org = merge $org (dict "telephone" .) -}}{{- end -}}
+{{- $website := dict
+  "@type" "WebSite"
+  "@id" (printf "%s#website" $baseURL)
+  "name" $siteName
+  "url" $baseURL
+  "description" (site.Params.siteDescription | default $description)
+  "publisher" (dict "@id" (printf "%s#organization" $baseURL))
+-}}
+{{- $serviceArea := site.Params.serviceArea | default "India" -}}
+{{- $professionalService := dict
+  "@type" "ProfessionalService"
+  "@id" (printf "%s#professional-service" $baseURL)
+  "name" $siteName
+  "url" $baseURL
+  "description" (site.Params.siteDescription | default $description)
+  "areaServed" $serviceArea
+  "provider" (dict "@id" (printf "%s#organization" $baseURL))
+-}}
+{{- with $telephone -}}{{- $professionalService = merge $professionalService (dict "telephone" .) -}}{{- end -}}
+{{- with $address -}}{{- $professionalService = merge $professionalService (dict "address" .) -}}{{- end -}}
+{{- $webPage := dict
+  "@type" "WebPage"
+  "@id" (printf "%s#webpage" $canonical)
+  "url" $canonical
+  "name" $title
+  "description" $description
+  "isPartOf" (dict "@id" (printf "%s#website" $baseURL))
+  "about" (dict "@id" (printf "%s#organization" $baseURL))
+-}}
+{{- $graph := slice $org $website $professionalService $webPage -}}
+{{- if and (eq $seoPage.Section "services") $seoPage.Params.services -}}
+  {{- range $index, $service := $seoPage.Params.services -}}
+    {{- $serviceSchema := dict
+      "@type" "Service"
+      "@id" (printf "%s#service-%d" $canonical (add $index 1))
+      "name" $service.title
+      "description" $service.description
+      "url" $canonical
+      "provider" (dict "@id" (printf "%s#professional-service" $baseURL))
+      "areaServed" $serviceArea
+    -}}
+    {{- $graph = $graph | append $serviceSchema -}}
+  {{- end -}}
+{{- end -}}
+{{- $schema := dict "@context" "https://schema.org" "@graph" $graph -}}
+<script type="application/ld+json">{{ $schema | jsonify (dict "indent" "  ") | safeJS }}</script>

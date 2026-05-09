@@ -13,6 +13,8 @@
                 alt="{{ $project.image_alt | default $project.title }}"
                 width="1536"
                 height="1024"
+                loading="lazy"
+                decoding="async"
               >
             {{ end }}
             <p class="card-meta">{{ $project.category }}</p>

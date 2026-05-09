@@ -1,6 +1,6 @@
 +++
-title = "CloudGenesis | Secure Digital Platforms for Healthcare Practices"
-description = "CloudGenesis builds professional websites, doctor portfolios, clinic applications, and secure healthcare software platforms for modern healthcare professionals."
+title = "Healthcare Websites and Apps"
+description = "CloudGenesis builds healthcare websites, doctor portfolio sites, clinic apps, and secure software platforms for doctors and medical practices."
 hero_title = "Secure digital platforms for modern healthcare practices."
 hero_text = "CloudGenesis helps doctors, clinics, and healthcare businesses launch professional websites, branded digital portfolios, and secure mobile applications built for growth."
 hero_primary_label = "Book a Consultation"
@@ -8,11 +8,15 @@ hero_primary_url = "/contactus/"
 hero_secondary_label = "Explore Services"
 hero_secondary_url = "/services/"
 overview_title = "What We Build"
-overview_text = "CloudGenesis specializes in professional websites, doctor portfolios, clinic management applications, and secure healthcare software platforms."
+overview_text = "CloudGenesis specializes in professional medical websites, doctor portfolios, clinic management applications, healthcare web portals, and secure software platforms."
 portfolio_title = "Featured Product"
 portfolio_text = "Doc AIde is a healthcare app platform that helps doctors create branded Android and iOS applications through a self-service portal, with custom branding, app generation, and publishing automation."
 value_title = "Why CloudGenesis"
 value_text = "We bring healthcare-first thinking, security-conscious engineering, premium design, and scalable architecture to every project."
+
+[build]
+render = "never"
+list = "never"
 
 [[services]]
 label = "01"
@@ -50,14 +54,14 @@ category = "Healthcare App Platform"
 description = "Helps doctors create branded Android and iOS applications through a self-service portal with custom branding and app store publishing automation."
 
 [[portfolio_highlights]]
-title = "Future Case Study"
-category = "Clinic Website"
-description = "Space reserved for featured clinic website projects showcasing healthcare digital transformation."
+title = "Clinic Website Programs"
+category = "Digital Presence"
+description = "Professional clinic websites designed to improve patient trust, highlight services, and support appointment inquiries."
 
 [[portfolio_highlights]]
-title = "Future Case Study"
+title = "Healthcare Admin Portals"
 category = "Healthcare Admin Portal"
-description = "Space reserved for healthcare administration and operational platform case studies."
+description = "Secure operational dashboards and web portals for healthcare workflows, patient engagement, scheduling, and reporting."
 
 [[value_points]]
 title = "Healthcare-First Approach"

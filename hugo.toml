@@ -18,14 +18,14 @@ disableKinds = ["taxonomy", "term", "RSS"]
   siteDescription = "Secure digital platforms for healthcare professionals, doctors, clinics, and healthcare businesses."
   siteTagline = "Secure digital platforms for modern healthcare practices."
   ogImage = "/images/og-cloudgenesis.png"
-  rootCanonical = "/home/"
+  rootCanonical = "/"
   contactApiUrl = "https://cloudgenesis-contact.contactus-8de.workers.dev"
   turnstileSiteKey = "0x4AAAAAADK3dfKQf0s9_F_d"
 
 [[menus.main]]
   identifier = "home"
   name = "Home"
-  pageRef = "/home"
+  pageRef = "/"
   weight = 10
 
 [[menus.main]]
