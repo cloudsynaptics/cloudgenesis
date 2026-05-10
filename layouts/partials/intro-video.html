@@ -8,12 +8,14 @@
     {{ $introVideoIds = $introVideoIds | append . }}
   {{ end }}
 {{ end }}
-{{ if gt (len $introVideoIds) 0 }}
+{{ $introPlaylistId := site.Params.introVideoYoutubePlaylistId | default "" }}
+{{ if or $introPlaylistId (gt (len $introVideoIds) 0) }}
   <section
     class="intro-video"
     aria-labelledby="intro-video-title"
     data-intro-video
-    data-intro-video-ids="{{ delimit $introVideoIds `,` }}"
+    {{ with $introPlaylistId }}data-intro-video-playlist-id="{{ . }}"{{ end }}
+    {{ if gt (len $introVideoIds) 0 }}data-intro-video-ids="{{ delimit $introVideoIds `,` }}"{{ end }}
     hidden>
     <div class="intro-video__backdrop" data-intro-video-close></div>
     <div class="intro-video__dialog" role="dialog" aria-modal="true" aria-labelledby="intro-video-title" aria-describedby="intro-video-copy">

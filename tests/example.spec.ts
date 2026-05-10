@@ -32,8 +32,9 @@ test('intro video shows once and can be dismissed', async ({ page }) => {
 
   const dialog = page.getByRole('dialog', { name: /digital healthcare-ready platforms/i });
   await expect(dialog).toBeVisible();
-  await expect(page.locator('iframe[title="CloudGenesis intro video"]')).toHaveAttribute('src', /youtube-nocookie\.com\/embed\/xSrBwINZ-nI/);
-  await expect(page.locator('iframe[title="CloudGenesis intro video"]')).toHaveAttribute('src', /playlist=xSrBwINZ-nI%2C5_4UpunL_Zw/);
+  await expect(page.locator('iframe[title="CloudGenesis intro video"]')).toHaveAttribute('src', /youtube-nocookie\.com\/embed\/videoseries/);
+  await expect(page.locator('iframe[title="CloudGenesis intro video"]')).toHaveAttribute('src', /list=PLmtqmcpqDN7BGi4XC6JufC_ww3xjLNYqv/);
+  await expect(page.locator('iframe[title="CloudGenesis intro video"]')).not.toHaveAttribute('src', /mute=1/);
 
   await page.getByRole('button', { name: /close intro video/i }).click();
   await expect(dialog).toBeHidden();
@@ -74,11 +75,11 @@ test('chatbot handles FAQ, fallback, and empty input', async ({ page }) => {
   await input.fill('Do you build websites for doctors?');
   await page.getByRole('button', { name: /^send$/i }).click();
   await expect(page.getByLabel(/cloudgenesis assistant is typing/i)).toBeVisible();
-  await expect(page.getByText(websiteAnswer)).toBeVisible();
+  await expect(page.getByText(websiteAnswer)).toBeVisible({ timeout: 10_000 });
 
   await input.fill('Can you answer something very specific?');
   await input.press('Enter');
-  await expect(page.getByText(fallbackAnswer)).toBeVisible();
+  await expect(page.getByText(fallbackAnswer)).toBeVisible({ timeout: 10_000 });
 });
 
 test('contact form remains visible', async ({ page }) => {

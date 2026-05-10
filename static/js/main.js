@@ -65,11 +65,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const introVideo = document.querySelector("[data-intro-video]");
 
   if (introVideo) {
+    const playlistId = String(introVideo.dataset.introVideoPlaylistId || "").trim();
     const videoIds = String(introVideo.dataset.introVideoIds || "")
       .split(",")
       .map((id) => id.trim())
       .filter(Boolean);
-    const storageKey = `cloudgenesisIntroVideoSeen:${videoIds.join("|")}`;
+    const storageKey = `cloudgenesisIntroVideoSeen:${playlistId || videoIds.join("|")}`;
     const frame = introVideo.querySelector("[data-intro-video-frame]");
     const closeButtons = Array.from(introVideo.querySelectorAll("[data-intro-video-close]"));
     const closeButton = introVideo.querySelector(".intro-video__close");
@@ -108,28 +109,34 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const openIntroVideo = () => {
-      if (videoIds.length === 0 || !frame || hasSeenIntro()) {
+      if ((!playlistId && videoIds.length === 0) || !frame || hasSeenIntro()) {
         return;
       }
 
-      const [firstVideoId] = videoIds;
       const searchParams = new URLSearchParams({
         autoplay: "1",
-        mute: "1",
         playsinline: "1",
         rel: "0",
         modestbranding: "1",
       });
+      let embedPath = "videoseries";
 
-      if (videoIds.length > 1) {
-        searchParams.set("playlist", videoIds.join(","));
+      if (playlistId) {
+        searchParams.set("list", playlistId);
+      } else {
+        const [firstVideoId] = videoIds;
+        embedPath = encodeURIComponent(firstVideoId);
+
+        if (videoIds.length > 1) {
+          searchParams.set("playlist", videoIds.join(","));
+        }
       }
 
       restoreFocusTarget = document.activeElement;
       markIntroSeen();
       introVideo.hidden = false;
       document.body.classList.add("has-intro-video-open");
-      frame.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(firstVideoId)}?${searchParams.toString()}" title="CloudGenesis intro video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+      frame.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${embedPath}?${searchParams.toString()}" title="CloudGenesis intro video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
 
       window.requestAnimationFrame(() => {
         if (closeButton) {
