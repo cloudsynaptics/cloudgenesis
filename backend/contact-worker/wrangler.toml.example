@@ -11,6 +11,11 @@ CONTACT_TO_EMAIL = "contactus@cloudgenesis.in"
 CONTACT_FROM_EMAIL = "CloudGenesis <contact@your-verified-domain.example>"
 SUBJECT_PREFIX = "CloudGenesis inquiry"
 
+# Optional Telegram notifications:
+# Configure these with `wrangler secret put`, not in this file:
+# TELEGRAM_BOT_TOKEN
+# TELEGRAM_CHAT_ID
+
 # Optional but recommended for IP-based rate limiting.
 # Create with:
 # wrangler kv namespace create CONTACT_RATE_LIMIT

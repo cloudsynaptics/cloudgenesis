@@ -1,4 +1,4 @@
-const JSON_HEADERS = {
+clarconst JSON_HEADERS = {
   "Content-Type": "application/json; charset=utf-8",
 };
 
@@ -95,6 +95,13 @@ export default {
         origin: request.headers.get("Origin") || "",
         spamScore,
       });
+
+      notifyTelegram(env, normalized, {
+        clientIp,
+        userAgent,
+        origin: request.headers.get("Origin") || "",
+        spamScore,
+      }, ctx);
 
       if (ctx && env.CONTACT_RATE_LIMIT && typeof env.CONTACT_RATE_LIMIT.put === "function") {
         ctx.waitUntil(markSuccessfulSend(env, clientIp));
@@ -291,6 +298,69 @@ async function sendEmail(env, payload, meta) {
   if (!response.ok) {
     throw new Error("Email provider rejected the request.");
   }
+}
+
+function notifyTelegram(env, payload, meta, ctx) {
+  if (!env.TELEGRAM_BOT_TOKEN || !env.TELEGRAM_CHAT_ID) {
+    return;
+  }
+
+  const delivery = sendTelegramMessage(env, payload, meta).catch(() => {
+    // Telegram is an optional notification channel; email delivery remains primary.
+  });
+
+  if (ctx && typeof ctx.waitUntil === "function") {
+    ctx.waitUntil(delivery);
+    return;
+  }
+
+  return delivery;
+}
+
+async function sendTelegramMessage(env, payload, meta) {
+  const token = String(env.TELEGRAM_BOT_TOKEN).trim();
+  const chatId = String(env.TELEGRAM_CHAT_ID).trim();
+
+  if (!token || !chatId) {
+    return;
+  }
+
+  const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      chat_id: chatId,
+      text: buildTelegramMessage(payload, meta),
+      disable_web_page_preview: true,
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error("Telegram rejected the request.");
+  }
+}
+
+function buildTelegramMessage(payload, meta) {
+  const lines = [
+    "New CloudGenesis inquiry",
+    "",
+    `Name: ${payload.name}`,
+    `Email: ${payload.email}`,
+    `Phone: ${payload.phone}`,
+    `Subject: ${payload.subject}`,
+    "",
+    "Message:",
+    payload.message,
+    "",
+    "Request metadata:",
+    `Origin: ${meta.origin}`,
+    `IP: ${meta.clientIp}`,
+    `Spam score: ${meta.spamScore}`,
+  ];
+
+  return lines.join("\n").slice(0, 3900);
 }
 
 function buildTextEmail(payload, meta) {

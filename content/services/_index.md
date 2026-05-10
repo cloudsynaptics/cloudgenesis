@@ -1,7 +1,7 @@
 +++
 title = "Healthcare Software Development Services"
 description = "Explore healthcare website design, doctor portfolio websites, clinic management apps, Flutter mobile apps, React portals, and product consulting."
-lead = "CloudGenesis provides professional software consulting services for healthcare-focused digital solutions, including medical website design, doctor portfolio pages, clinic mobile applications, and secure healthcare platforms. We help doctors, clinics, and healthcare-led businesses create reliable digital products that look professional, function smoothly, and support patient engagement. Our services combine clean design and security-focused development to deliver solutions that are easy to manage and built for real-world healthcare needs."
+lead = "CloudGenesis provides professional software consulting services for healthcare-focused digital solutions, including medical website design, doctor portfolio pages, clinic mobile applications, and secure healthcare platforms. "
 process_title = "Our Project Process"
 process_text = "We follow a structured, transparent approach to discovery, design, build, and launch, with ongoing support to ensure your platform grows with your practice."
 
