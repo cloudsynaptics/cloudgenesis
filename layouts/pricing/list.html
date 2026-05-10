@@ -5,6 +5,7 @@
     "title" (.Params.pricing_title | default .Title)
     "subtitle" .Params.pricing_subtitle
     "packages" .Params.packages
+    "hideHeading" true
   ) }}
   {{ with .Params.doc_aide_pricing }}
     {{ partial "pricing-packages.html" (dict

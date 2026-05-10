@@ -1,6 +1,7 @@
 +++
 title = "Healthcare Website Packages"
 description = "Explore premium healthcare website packages for doctors, clinics, and healthcare businesses from CloudGenesis."
+page_header_class = "page-header--wide"
 lead = "Professional digital solutions for doctors, clinics, and healthcare businesses."
 kicker = "Pricing"
 pricing_title = "Healthcare Website Packages"

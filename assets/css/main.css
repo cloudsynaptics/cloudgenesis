@@ -1201,6 +1201,15 @@ p {
   max-width: 40rem;
 }
 
+.page-header--wide .page-header__inner {
+  max-width: none;
+  text-align: left;
+}
+
+.page-header--wide .page-header__inner p {
+  max-width: none;
+}
+
 .prose-block {
   display: grid;
   gap: var(--space-3);

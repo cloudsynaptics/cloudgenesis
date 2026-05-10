@@ -1,6 +1,7 @@
 +++
 title = "Contact CloudGenesis"
 description = "Contact CloudGenesis for healthcare website design, doctor portfolio sites, clinic apps, secure web portals, and software consulting."
+page_header_class = "page-header--wide"
 lead = "Get in touch with CloudGenesis to discuss your healthcare website, doctor portfolio, clinic application, secure web portal, or custom software platform."
 cta_title = "Ready to build your digital healthcare platform?"
 cta_text = "Let's discuss your project requirements, timeline, and how we can help you build a secure, professional digital experience."

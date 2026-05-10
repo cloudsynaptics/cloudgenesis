@@ -1,4 +1,4 @@
-<section class="page-header">
+<section class="page-header{{ with .Params.page_header_class }} {{ . }}{{ end }}">
   <div class="container page-header__inner animate-stagger">
     <p class="section-kicker">{{ .Params.kicker | default "Page overview" }}</p>
     <h1>{{ .Title }}</h1>

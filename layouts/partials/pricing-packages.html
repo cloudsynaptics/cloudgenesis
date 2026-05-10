@@ -1,13 +1,15 @@
 {{ $sectionClass := .sectionClass | default "section" }}
 <section class="{{ $sectionClass }}">
   <div class="container">
-    <div class="section-heading reveal">
-      <p class="section-kicker">{{ .kicker | default "Pricing" }}</p>
-      <h2>{{ .title }}</h2>
-      {{ with .subtitle }}
-        <p class="section-lead">{{ . }}</p>
-      {{ end }}
-    </div>
+    {{ if not .hideHeading }}
+      <div class="section-heading reveal">
+        <p class="section-kicker">{{ .kicker | default "Pricing" }}</p>
+        <h2>{{ .title }}</h2>
+        {{ with .subtitle }}
+          <p class="section-lead">{{ . }}</p>
+        {{ end }}
+      </div>
+    {{ end }}
     <div class="pricing-grid">
       {{ range $index, $package := .packages }}
         <article class="pricing-card reveal" data-reveal-delay="{{ mod $index 3 }}">
