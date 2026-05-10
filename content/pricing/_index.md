@@ -35,7 +35,7 @@ price_usd = "$370 – $1,010"
 price_euro = "€315 – €860"
 price_aed = "AED 1,365 – AED 3,700"
 features = [
-  "Premium design",
+  "Starter plus Premium design",
   "Appointment forms",
   "Blog",
   "Analytics",
@@ -53,7 +53,7 @@ price_usd = "$3,180 – $15,900+"
 price_euro = "€2,710 – €13,545+"
 price_aed = "AED 11,690 – AED 58,440+"
 features = [
-  "Patient portal",
+  "Professional plus Patient portal",
   "Authentication",
   "Secure backend",
   "Cloud hosting"
@@ -66,11 +66,11 @@ subtitle = "Branded mobile app solutions for doctors, clinics, and healthcare pr
 
 [[doc_aide_pricing.packages]]
 slug = "doc-aide-professional"
-name = "Doc AIde Professional"
+name = "Doc AIde Professional (Yearly)"
 best_for = "Clinics and growing practices"
 ribbon = "Doc AIde"
 ribbon_tone = "blue"
-price = "₹35,000 – ₹90,000"
+price = "₹Starting 35,000"
 price_usd = "$370 – $955"
 price_euro = "€315 – €815"
 price_aed = "AED 1,365 – AED 3,505"

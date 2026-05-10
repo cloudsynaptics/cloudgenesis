@@ -1,4 +1,12 @@
 <footer class="site-footer">
+  {{ $contactLinks := slice }}
+  {{ with site.GetPage "section" "contactus" }}
+    {{ range .Params.contact_methods }}
+      {{ if in (slice "Email" "Phone" "Office") .label }}
+        {{ $contactLinks = $contactLinks | append . }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
   <div class="container footer-grid">
     <div class="footer-brand">
       <a class="brand-mark brand-mark--footer" href="{{ `` | relURL }}" aria-label="{{ site.Title }} home">
@@ -17,6 +25,37 @@
         {{ end }}
       </ul>
     </nav>
+    {{ if gt (len $contactLinks) 0 }}
+      <div class="footer-contact">
+        <h2>Contact</h2>
+        <ul class="footer-contact-list">
+          {{ range $contactLinks }}
+            <li>
+              <a class="footer-contact-link" href="{{ .href | safeURL }}">
+                <span class="footer-contact-link__icon" aria-hidden="true">
+                  {{ if eq .label "Email" }}
+                    <svg viewBox="0 0 24 24" focusable="false">
+                      <path d="M4.75 6.75h14.5v10.5H4.75z"></path>
+                      <path d="m5.25 7.25 6.75 5 6.75-5"></path>
+                    </svg>
+                  {{ else if eq .label "Phone" }}
+                    <svg viewBox="0 0 24 24" focusable="false">
+                      <path d="M8.5 5.25 6.35 7.4c-.8.8.15 4.1 2.9 6.85s6.05 3.7 6.85 2.9l2.15-2.15-3.25-3.25-1.65 1.65c-.6-.25-1.35-.75-2.1-1.5s-1.25-1.5-1.5-2.1l1.65-1.65z"></path>
+                    </svg>
+                  {{ else }}
+                    <svg viewBox="0 0 24 24" focusable="false">
+                      <path d="M12 20.25s6-5.4 6-10.15a6 6 0 0 0-12 0c0 4.75 6 10.15 6 10.15z"></path>
+                      <path d="M12 12.35a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5z"></path>
+                    </svg>
+                  {{ end }}
+                </span>
+                <span>{{ .value }}</span>
+              </a>
+            </li>
+          {{ end }}
+        </ul>
+      </div>
+    {{ end }}
   </div>
   <div class="container footer-meta">
     <p>&copy; {{ now.Year }} {{ site.Params.siteName }}. All rights reserved.</p>
