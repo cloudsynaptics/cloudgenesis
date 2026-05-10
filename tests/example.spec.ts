@@ -3,6 +3,14 @@ import { test, expect } from '@playwright/test';
 const websiteAnswer = 'Yes. CloudGenesis builds premium, responsive, and professional websites for doctors, clinics, hospitals, and healthcare-led businesses.';
 const fallbackAnswer = 'I can help with basic questions about CloudGenesis services, healthcare websites, mobile apps, secure platforms, pricing, and Doc AIde. For specific project requirements, please book a consultation or submit the Contact Us form.';
 
+async function dismissIntroVideo(page) {
+  const dialog = page.locator('[data-intro-video]');
+
+  if (await dialog.isVisible().catch(() => false)) {
+    await page.getByRole('button', { name: /close intro video/i }).click();
+  }
+}
+
 test.beforeEach(async ({ page }) => {
   await page.route('**/chat', async (route) => {
     const payload = route.request().postDataJSON() as { message?: string };
@@ -19,8 +27,24 @@ test.beforeEach(async ({ page }) => {
   });
 });
 
+test('intro video shows once and can be dismissed', async ({ page }) => {
+  await page.goto('/', { waitUntil: 'domcontentloaded' });
+
+  const dialog = page.getByRole('dialog', { name: /digital healthcare-ready platforms/i });
+  await expect(dialog).toBeVisible();
+  await expect(page.locator('iframe[title="CloudGenesis intro video"]')).toHaveAttribute('src', /youtube-nocookie\.com\/embed\/xSrBwINZ-nI/);
+  await expect(page.locator('iframe[title="CloudGenesis intro video"]')).toHaveAttribute('src', /playlist=xSrBwINZ-nI%2C5_4UpunL_Zw/);
+
+  await page.getByRole('button', { name: /close intro video/i }).click();
+  await expect(dialog).toBeHidden();
+
+  await page.reload({ waitUntil: 'domcontentloaded' });
+  await expect(dialog).toBeHidden();
+});
+
 test('chatbot opens and closes', async ({ page }) => {
-  await page.goto('/');
+  await page.goto('/', { waitUntil: 'domcontentloaded' });
+  await dismissIntroVideo(page);
 
   const toggle = page.getByRole('button', { name: /ask cloudgenesis/i });
   const panel = page.getByRole('region', { name: /cloudgenesis assistant/i });
@@ -40,7 +64,8 @@ test('chatbot handles FAQ, fallback, and empty input', async ({ page }) => {
     }
   });
 
-  await page.goto('/');
+  await page.goto('/', { waitUntil: 'domcontentloaded' });
+  await dismissIntroVideo(page);
   await page.getByRole('button', { name: /ask cloudgenesis/i }).click();
   await page.getByRole('button', { name: /^send$/i }).click();
   expect(submittedMessages).toBe(0);
@@ -57,7 +82,8 @@ test('chatbot handles FAQ, fallback, and empty input', async ({ page }) => {
 });
 
 test('contact form remains visible', async ({ page }) => {
-  await page.goto('/contactus/');
+  await page.goto('/contactus/', { waitUntil: 'domcontentloaded' });
+  await dismissIntroVideo(page);
 
   await expect(page.getByLabel('Name')).toBeVisible();
   await expect(page.getByLabel('Email')).toBeVisible();
@@ -66,7 +92,8 @@ test('contact form remains visible', async ({ page }) => {
 });
 
 test('home page has CloudGenesis title', async ({ page }) => {
-  await page.goto('/');
+  await page.goto('/', { waitUntil: 'domcontentloaded' });
+  await dismissIntroVideo(page);
 
   await expect(page).toHaveTitle(/CloudGenesis/);
 });

@@ -1397,6 +1397,116 @@ p {
   color: #b42318;
 }
 
+body.has-intro-video-open {
+  overflow: hidden;
+}
+
+.intro-video {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  padding: clamp(1rem, 3vw, 2rem);
+}
+
+.intro-video[hidden] {
+  display: none;
+}
+
+.intro-video__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(2, 16, 38, 0.72);
+  backdrop-filter: blur(10px);
+}
+
+.intro-video__dialog {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: var(--space-3);
+  width: min(58rem, 100%);
+  max-height: min(46rem, calc(100vh - 2rem));
+  overflow: auto;
+  padding: clamp(1rem, 2.4vw, 1.5rem);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-lg);
+}
+
+.intro-video__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.intro-video__header .section-kicker,
+.intro-video__header h2,
+.intro-video__header p {
+  margin: 0;
+}
+
+.intro-video__header h2 {
+  font-size: clamp(1.35rem, 2.4vw, 2rem);
+}
+
+.intro-video__header p:not(.section-kicker) {
+  margin-top: 0.35rem;
+  color: var(--color-muted);
+}
+
+.intro-video__close {
+  display: inline-grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 2.35rem;
+  height: 2.35rem;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-surface-muted);
+  color: var(--color-muted);
+  font-weight: 700;
+  transition:
+    border-color var(--transition),
+    color var(--transition),
+    transform var(--transition);
+}
+
+.intro-video__close:hover {
+  transform: translateY(-1px);
+  border-color: var(--color-border-strong);
+  color: var(--color-text);
+}
+
+.intro-video__frame {
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-dark);
+}
+
+.intro-video__frame iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.intro-video__actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.intro-video__skip {
+  min-height: 2.7rem;
+  padding: 0.65rem 1rem;
+  font-size: var(--text-sm);
+}
+
 .chatbot {
   position: fixed;
   right: clamp(1rem, 3vw, 1.6rem);

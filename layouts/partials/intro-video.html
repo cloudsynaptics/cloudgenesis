@@ -1,0 +1,36 @@
+{{ $introVideoIds := slice }}
+{{ with site.Params.introVideoYoutubeIds }}
+  {{ range . }}
+    {{ $introVideoIds = $introVideoIds | append . }}
+  {{ end }}
+{{ else }}
+  {{ with site.Params.introVideoYoutubeId }}
+    {{ $introVideoIds = $introVideoIds | append . }}
+  {{ end }}
+{{ end }}
+{{ if gt (len $introVideoIds) 0 }}
+  <section
+    class="intro-video"
+    aria-labelledby="intro-video-title"
+    data-intro-video
+    data-intro-video-ids="{{ delimit $introVideoIds `,` }}"
+    hidden>
+    <div class="intro-video__backdrop" data-intro-video-close></div>
+    <div class="intro-video__dialog" role="dialog" aria-modal="true" aria-labelledby="intro-video-title" aria-describedby="intro-video-copy">
+      <div class="intro-video__header">
+        <div>
+          <p class="section-kicker">CloudGenesis intro</p>
+          <h2 id="intro-video-title">Digital healthcare-ready platforms</h2>
+          <p id="intro-video-copy">A quick look at how CloudGenesis supports modern healthcare practices.</p>
+        </div>
+        <button class="intro-video__close" type="button" aria-label="Close intro video" data-intro-video-close>
+          <span aria-hidden="true">x</span>
+        </button>
+      </div>
+      <div class="intro-video__frame" data-intro-video-frame></div>
+      <div class="intro-video__actions">
+        <button class="btn btn-secondary intro-video__skip" type="button" data-intro-video-close>Skip intro</button>
+      </div>
+    </div>
+  </section>
+{{ end }}

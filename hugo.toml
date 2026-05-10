@@ -21,6 +21,7 @@ disableKinds = ["taxonomy", "term", "RSS"]
   rootCanonical = "/"
   contactApiUrl = "https://cloudgenesis-contact.contactus-8de.workers.dev"
   chatbotApiUrl = "https://cloudgenesis-contact.contactus-8de.workers.dev/chat"
+  introVideoYoutubeIds = ["xSrBwINZ-nI", "5_4UpunL_Zw"]
   turnstileSiteKey = "0x4AAAAAADK3dfKQf0s9_F_d"
 
 [[menus.main]]

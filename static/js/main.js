@@ -62,6 +62,94 @@ document.addEventListener("DOMContentLoaded", () => {
   const packagePrefillData = document.querySelector("[data-package-prefill]");
   const heroRotators = Array.from(document.querySelectorAll("[data-hero-rotator]"));
   const chatbots = Array.from(document.querySelectorAll("[data-chatbot]"));
+  const introVideo = document.querySelector("[data-intro-video]");
+
+  if (introVideo) {
+    const videoIds = String(introVideo.dataset.introVideoIds || "")
+      .split(",")
+      .map((id) => id.trim())
+      .filter(Boolean);
+    const storageKey = `cloudgenesisIntroVideoSeen:${videoIds.join("|")}`;
+    const frame = introVideo.querySelector("[data-intro-video-frame]");
+    const closeButtons = Array.from(introVideo.querySelectorAll("[data-intro-video-close]"));
+    const closeButton = introVideo.querySelector(".intro-video__close");
+    let restoreFocusTarget = null;
+
+    const hasSeenIntro = () => {
+      try {
+        return window.localStorage.getItem(storageKey) === "true";
+      } catch (error) {
+        return false;
+      }
+    };
+
+    const markIntroSeen = () => {
+      try {
+        window.localStorage.setItem(storageKey, "true");
+      } catch (error) {
+        // If storage is unavailable, the intro simply behaves like a normal dismissible modal.
+      }
+    };
+
+    const stopIntroVideo = () => {
+      if (frame) {
+        frame.textContent = "";
+      }
+    };
+
+    const closeIntroVideo = ({ restoreFocus = false } = {}) => {
+      introVideo.hidden = true;
+      document.body.classList.remove("has-intro-video-open");
+      stopIntroVideo();
+
+      if (restoreFocus && restoreFocusTarget && typeof restoreFocusTarget.focus === "function") {
+        restoreFocusTarget.focus();
+      }
+    };
+
+    const openIntroVideo = () => {
+      if (videoIds.length === 0 || !frame || hasSeenIntro()) {
+        return;
+      }
+
+      const [firstVideoId] = videoIds;
+      const searchParams = new URLSearchParams({
+        autoplay: "1",
+        mute: "1",
+        playsinline: "1",
+        rel: "0",
+        modestbranding: "1",
+      });
+
+      if (videoIds.length > 1) {
+        searchParams.set("playlist", videoIds.join(","));
+      }
+
+      restoreFocusTarget = document.activeElement;
+      markIntroSeen();
+      introVideo.hidden = false;
+      document.body.classList.add("has-intro-video-open");
+      frame.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(firstVideoId)}?${searchParams.toString()}" title="CloudGenesis intro video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+
+      window.requestAnimationFrame(() => {
+        if (closeButton) {
+          closeButton.focus();
+        }
+      });
+    };
+
+    closeButtons.forEach((button) => {
+      button.addEventListener("click", () => closeIntroVideo({ restoreFocus: true }));
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !introVideo.hidden) {
+        closeIntroVideo({ restoreFocus: true });
+      }
+    });
+
+    window.requestAnimationFrame(openIntroVideo);
+  }
 
   heroRotators.forEach((rotator) => {
     const images = Array.from(rotator.querySelectorAll("[data-hero-rotator-image]"));

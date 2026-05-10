@@ -2,6 +2,7 @@
   {{- $heroBannerPath := "/images/Main_Banner.png" -}}
   {{- $heroBannerOnePath := "/images/Main_Banner_1.png" -}}
   {{- $heroBannerTwoPath := "/images/Main_Banner_2.png" -}}
+  {{- $heroBannerThreePath := "/images/Main_Banner_3.jpeg" -}}
   {{- with os.Stat "static/images/Main_Banner.png" -}}
     {{- $heroBannerPath = printf "%s?v=%d" $heroBannerPath .ModTime.Unix -}}
   {{- end -}}
@@ -10,6 +11,9 @@
   {{- end -}}
   {{- with os.Stat "static/images/Main_Banner_2.png" -}}
     {{- $heroBannerTwoPath = printf "%s?v=%d" $heroBannerTwoPath .ModTime.Unix -}}
+  {{- end -}}
+  {{- with os.Stat "static/images/Main_Banner_3.jpeg" -}}
+    {{- $heroBannerThreePath = printf "%s?v=%d" $heroBannerThreePath .ModTime.Unix -}}
   {{- end -}}
   <div class="container hero-layout">
     <div class="hero-copy animate-stagger">
@@ -59,6 +63,17 @@
         aria-hidden="true"
         data-hero-rotator-image
       >
+      <img
+        class="visual-panel__image hero-rotator__image"
+        src="{{ $heroBannerThreePath | relURL }}"
+        alt="CloudGenesis healthcare technology banner for secure digital platforms and modern medical practices."
+        width="1536"
+        height="1024"
+        loading="lazy"
+        decoding="async"
+        aria-hidden="true"
+        data-hero-rotator-image
+      >
       <div class="hero-rotator__controls" role="group" aria-label="Choose hero banner">
         <button
           class="hero-rotator__control is-active"
@@ -78,6 +93,13 @@
           class="hero-rotator__control"
           type="button"
           aria-label="Show hero banner 3"
+          aria-pressed="false"
+          data-hero-rotator-control
+        ></button>
+        <button
+          class="hero-rotator__control"
+          type="button"
+          aria-label="Show hero banner 4"
           aria-pressed="false"
           data-hero-rotator-control
         ></button>
