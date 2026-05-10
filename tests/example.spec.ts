@@ -48,6 +48,7 @@ test('chatbot handles FAQ, fallback, and empty input', async ({ page }) => {
   const input = page.getByLabel(/your question/i);
   await input.fill('Do you build websites for doctors?');
   await page.getByRole('button', { name: /^send$/i }).click();
+  await expect(page.getByLabel(/cloudgenesis assistant is typing/i)).toBeVisible();
   await expect(page.getByText(websiteAnswer)).toBeVisible();
 
   await input.fill('Can you answer something very specific?');

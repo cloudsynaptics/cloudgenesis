@@ -154,6 +154,10 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
+    const pause = (delay) => new Promise((resolve) => {
+      window.setTimeout(resolve, delay);
+    });
+
     const setChatStatus = (message, state = "") => {
       if (!status) {
         return;
@@ -170,6 +174,40 @@ document.addEventListener("DOMContentLoaded", () => {
       messages.appendChild(item);
       messages.scrollTop = messages.scrollHeight;
       return item;
+    };
+
+    const appendTypingIndicator = () => {
+      const item = document.createElement("p");
+      item.className = "chatbot__message chatbot__message--bot chatbot__message--typing";
+      item.setAttribute("aria-label", "CloudGenesis Assistant is typing");
+
+      for (let index = 0; index < 3; index += 1) {
+        const dot = document.createElement("span");
+        dot.setAttribute("aria-hidden", "true");
+        item.appendChild(dot);
+      }
+
+      messages.appendChild(item);
+      messages.scrollTop = messages.scrollHeight;
+      return item;
+    };
+
+    const revealBotMessage = async (item, message) => {
+      item.classList.remove("chatbot__message--typing");
+      item.removeAttribute("aria-label");
+      item.textContent = "";
+
+      if (reducedMotionQuery.matches) {
+        item.textContent = message;
+        messages.scrollTop = messages.scrollHeight;
+        return;
+      }
+
+      for (const character of message) {
+        item.textContent += character;
+        messages.scrollTop = messages.scrollHeight;
+        await pause(character === " " ? 8 : 14);
+      }
     };
 
     const setPanelOpen = (isOpen, { restoreFocus = false } = {}) => {
@@ -209,7 +247,7 @@ document.addEventListener("DOMContentLoaded", () => {
       input.disabled = true;
       sendButton.disabled = true;
       setChatStatus("");
-      const loadingMessage = appendMessage("Checking the CloudGenesis FAQ...", "bot");
+      const loadingMessage = appendTypingIndicator();
 
       try {
         const response = await fetch(endpoint, {
@@ -227,9 +265,13 @@ document.addEventListener("DOMContentLoaded", () => {
           throw new Error(result.error || "The assistant is unavailable right now.");
         }
 
-        loadingMessage.textContent = result.answer;
+        if (!reducedMotionQuery.matches) {
+          await pause(Math.min(900, Math.max(420, message.length * 18)));
+        }
+
+        await revealBotMessage(loadingMessage, result.answer);
       } catch (error) {
-        loadingMessage.textContent = "I could not reach the assistant right now. Please use the Contact Us form for specific project requirements.";
+        await revealBotMessage(loadingMessage, "I could not reach the assistant right now. Please use the Contact Us form for specific project requirements.");
         setChatStatus(error.message || "The assistant is unavailable right now.", "error");
       } finally {
         input.disabled = false;

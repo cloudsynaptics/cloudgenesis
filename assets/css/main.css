@@ -1542,6 +1542,31 @@ p {
   background: var(--color-primary-soft);
 }
 
+.chatbot__message--typing {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28rem;
+  min-width: 3.2rem;
+  min-height: 2.45rem;
+}
+
+.chatbot__message--typing span {
+  width: 0.36rem;
+  height: 0.36rem;
+  border-radius: 999px;
+  background: var(--color-muted);
+  opacity: 0.42;
+  animation: chatbotTyping 1s var(--ease-soft) infinite;
+}
+
+.chatbot__message--typing span:nth-child(2) {
+  animation-delay: 140ms;
+}
+
+.chatbot__message--typing span:nth-child(3) {
+  animation-delay: 280ms;
+}
+
 .chatbot__form {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
@@ -1585,6 +1610,20 @@ p {
 
 .chatbot__status.is-error {
   color: #b42318;
+}
+
+@keyframes chatbotTyping {
+  0%,
+  70%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.42;
+  }
+
+  35% {
+    transform: translateY(-0.18rem);
+    opacity: 0.9;
+  }
 }
 
 .turnstile-field {
