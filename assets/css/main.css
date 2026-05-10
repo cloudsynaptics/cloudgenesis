@@ -968,6 +968,8 @@ p {
 }
 
 .pricing-card {
+  position: relative;
+  overflow: hidden;
   grid-template-rows: auto auto auto 1fr auto;
   height: 100%;
   background: var(--color-surface);
@@ -980,9 +982,40 @@ p {
     background var(--transition);
 }
 
+.pricing-card__ribbon {
+  position: absolute;
+  top: 1rem;
+  right: -2.6rem;
+  z-index: 1;
+  width: 9rem;
+  padding: 0.38rem 0.5rem;
+  background: var(--color-accent-deep);
+  color: var(--color-inverse);
+  box-shadow: 0 0.65rem 1.2rem rgba(15, 23, 42, 0.18);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  transform: rotate(45deg);
+  transform-origin: center;
+}
+
+.pricing-card__ribbon--pink {
+  background: #d9308a;
+}
+
+.pricing-card__ribbon--blue {
+  background: var(--color-primary);
+}
+
+.pricing-card__ribbon--green {
+  background: #22a66f;
+}
+
 .pricing-card__header {
   display: grid;
   gap: var(--space-1);
+  padding-right: 2.25rem;
 }
 
 .pricing-card__price {

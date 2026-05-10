@@ -13,6 +13,9 @@
     <div class="pricing-grid">
       {{ range $index, $package := .packages }}
         <article class="pricing-card reveal" data-reveal-delay="{{ mod $index 3 }}">
+          {{ with $package.ribbon }}
+            <span class="pricing-card__ribbon{{ with $package.ribbon_tone }} pricing-card__ribbon--{{ . }}{{ end }}" aria-label="{{ . }} package">{{ . }}</span>
+          {{ end }}
           <div class="pricing-card__header">
             <p class="card-meta">Best for {{ $package.best_for }}</p>
             <h3>{{ $package.name }}</h3>
