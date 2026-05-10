@@ -20,6 +20,7 @@ disableKinds = ["taxonomy", "term", "RSS"]
   ogImage = "/images/og-cloudgenesis.png"
   rootCanonical = "/"
   contactApiUrl = "https://cloudgenesis-contact.contactus-8de.workers.dev"
+  chatbotApiUrl = "https://cloudgenesis-contact.contactus-8de.workers.dev/chat"
   turnstileSiteKey = "0x4AAAAAADK3dfKQf0s9_F_d"
 
 [[menus.main]]

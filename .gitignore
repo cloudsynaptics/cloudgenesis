@@ -41,4 +41,3 @@ pnpm-debug.log*
 
 # Public repo docs not required by the Hugo build
 /README.md
-/backend/contact-worker/README.md

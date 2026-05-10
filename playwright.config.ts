@@ -4,6 +4,12 @@ export default defineConfig({
   testDir: './tests',
   timeout: 30_000,
   fullyParallel: true,
+  webServer: {
+    command: 'hugo server --bind 127.0.0.1 --port 1313 --disableFastRender',
+    url: 'http://127.0.0.1:1313',
+    reuseExistingServer: true,
+    timeout: 120_000,
+  },
 
   use: {
     baseURL: 'http://localhost:1313',

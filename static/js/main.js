@@ -61,6 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const pricingCards = Array.from(document.querySelectorAll(".pricing-card"));
   const packagePrefillData = document.querySelector("[data-package-prefill]");
   const heroRotators = Array.from(document.querySelectorAll("[data-hero-rotator]"));
+  const chatbots = Array.from(document.querySelectorAll("[data-chatbot]"));
 
   heroRotators.forEach((rotator) => {
     const images = Array.from(rotator.querySelectorAll("[data-hero-rotator-image]"));
@@ -136,6 +137,112 @@ document.addEventListener("DOMContentLoaded", () => {
 
     updateRotation();
     addMediaQueryChangeListener(reducedMotionQuery, updateRotation);
+  });
+
+  chatbots.forEach((chatbot) => {
+    const endpoint = chatbot.dataset.chatbotEndpoint;
+    const toggleButton = chatbot.querySelector("[data-chatbot-toggle]");
+    const closeButton = chatbot.querySelector("[data-chatbot-close]");
+    const panel = chatbot.querySelector("[data-chatbot-panel]");
+    const form = chatbot.querySelector("[data-chatbot-form]");
+    const input = chatbot.querySelector("[data-chatbot-input]");
+    const messages = chatbot.querySelector("[data-chatbot-messages]");
+    const status = chatbot.querySelector("[data-chatbot-status]");
+    const sendButton = form ? form.querySelector("button[type='submit']") : null;
+
+    if (!endpoint || !toggleButton || !panel || !form || !input || !messages || !sendButton) {
+      return;
+    }
+
+    const setChatStatus = (message, state = "") => {
+      if (!status) {
+        return;
+      }
+
+      status.textContent = message;
+      status.classList.toggle("is-error", state === "error");
+    };
+
+    const appendMessage = (message, type = "bot") => {
+      const item = document.createElement("p");
+      item.className = `chatbot__message chatbot__message--${type}`;
+      item.textContent = message;
+      messages.appendChild(item);
+      messages.scrollTop = messages.scrollHeight;
+      return item;
+    };
+
+    const setPanelOpen = (isOpen, { restoreFocus = false } = {}) => {
+      panel.hidden = !isOpen;
+      toggleButton.setAttribute("aria-expanded", String(isOpen));
+
+      if (isOpen) {
+        window.requestAnimationFrame(() => input.focus());
+      } else if (restoreFocus) {
+        toggleButton.focus();
+      }
+    };
+
+    toggleButton.addEventListener("click", () => {
+      const isOpen = toggleButton.getAttribute("aria-expanded") === "true";
+      setPanelOpen(!isOpen, { restoreFocus: isOpen });
+    });
+
+    if (closeButton) {
+      closeButton.addEventListener("click", () => {
+        setPanelOpen(false, { restoreFocus: true });
+      });
+    }
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const message = input.value.trim();
+
+      if (!message || message.length > 500) {
+        setChatStatus("Please enter a valid question up to 500 characters.", "error");
+        input.focus();
+        return;
+      }
+
+      appendMessage(message, "user");
+      input.value = "";
+      input.disabled = true;
+      sendButton.disabled = true;
+      setChatStatus("");
+      const loadingMessage = appendMessage("Checking the CloudGenesis FAQ...", "bot");
+
+      try {
+        const response = await fetch(endpoint, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({ message }),
+          credentials: "omit",
+        });
+        const result = await response.json().catch(() => ({}));
+
+        if (!response.ok || result.success === false || !result.answer) {
+          throw new Error(result.error || "The assistant is unavailable right now.");
+        }
+
+        loadingMessage.textContent = result.answer;
+      } catch (error) {
+        loadingMessage.textContent = "I could not reach the assistant right now. Please use the Contact Us form for specific project requirements.";
+        setChatStatus(error.message || "The assistant is unavailable right now.", "error");
+      } finally {
+        input.disabled = false;
+        sendButton.disabled = false;
+        input.focus();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && toggleButton.getAttribute("aria-expanded") === "true") {
+        setPanelOpen(false, { restoreFocus: true });
+      }
+    });
   });
 
   pricingCards.forEach((card) => {

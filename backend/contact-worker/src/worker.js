@@ -1,8 +1,9 @@
-clarconst JSON_HEADERS = {
+const JSON_HEADERS = {
   "Content-Type": "application/json; charset=utf-8",
 };
 
 const MAX_BODY_BYTES = 24 * 1024;
+const MAX_CHAT_MESSAGE_LENGTH = 500;
 const RATE_LIMIT_WINDOW_SECONDS = 60 * 60;
 const RATE_LIMIT_MAX_REQUESTS = 5;
 const DEFAULT_ALLOWED_ORIGINS = [
@@ -18,9 +19,69 @@ const fieldLimits = {
   message: { min: 20, max: 2500 },
 };
 
+const CHAT_FALLBACK_ANSWER = "I can help with basic questions about CloudGenesis services, healthcare websites, mobile apps, secure platforms, pricing, and Doc AIde. For specific project requirements, please book a consultation or submit the Contact Us form.";
+
+const CHAT_FAQ_ENTRIES = [
+  {
+    keywords: ["what is cloudgenesis", "cloudgenesis", "company", "who are you", "about cloudgenesis"],
+    answer: "CloudGenesis is a premium software consulting company based in Chennai, India, focused on building modern websites, mobile apps, and secure digital platforms for doctors, clinics, and healthcare-focused businesses.",
+  },
+  {
+    keywords: ["where is cloudgenesis", "location", "located", "chennai", "india", "based"],
+    answer: "CloudGenesis is based in Chennai, India, and serves healthcare professionals across India, with future support for global healthcare-focused businesses.",
+  },
+  {
+    keywords: ["what services", "services", "offer", "development", "healthcare digital solutions", "cloud consulting"],
+    answer: "CloudGenesis offers healthcare website development, doctor portfolio websites, clinic websites, mobile app development, secure healthcare platforms, cloud consulting, and AI-enabled healthcare digital solutions.",
+  },
+  {
+    keywords: ["doctor website", "clinic website", "websites for doctors", "build websites", "website", "hospital website"],
+    answer: "Yes. CloudGenesis builds premium, responsive, and professional websites for doctors, clinics, hospitals, and healthcare-led businesses.",
+  },
+  {
+    keywords: ["mobile app", "android", "ios", "app development", "build mobile", "mobile applications"],
+    answer: "Yes. CloudGenesis builds Android and iOS applications for healthcare professionals and healthcare-focused businesses.",
+  },
+  {
+    keywords: ["clinic management", "appointment system", "patient portal", "clinic dashboard", "workflow applications", "healthcare platform"],
+    answer: "Yes. CloudGenesis can build secure healthcare platforms such as appointment systems, patient portals, clinic dashboards, and healthcare workflow applications based on the business requirement.",
+  },
+  {
+    keywords: ["secure", "security", "healthcare platforms secure", "privacy", "access control", "reliability"],
+    answer: "Yes. CloudGenesis follows a secure-first engineering approach with strong focus on privacy, access control, scalable architecture, and healthcare-grade reliability.",
+  },
+  {
+    keywords: ["healthcare data privacy", "data privacy", "compliance", "compliance-minded", "privacy support"],
+    answer: "Yes. CloudGenesis designs healthcare platforms with privacy, security, and compliance-minded architecture from the beginning.",
+  },
+  {
+    keywords: ["doc aide", "doc aide app", "branded app", "app generation", "publishing automation"],
+    answer: "Doc AIde is a future CloudGenesis product concept that helps doctors create branded Android and iOS applications through a self-service portal with custom branding, app generation, and publishing automation.",
+  },
+  {
+    keywords: ["how much", "website cost", "pricing", "price", "cost", "package", "packages"],
+    answer: "Pricing depends on the scope, number of pages, design complexity, integrations, and platform features. CloudGenesis offers packages for individual doctors, clinics, and secure healthcare platforms.",
+  },
+  {
+    keywords: ["get pricing", "pricing quote", "quote", "estimate"],
+    answer: "You can book a consultation or submit the contact form. CloudGenesis will review your requirement and suggest the right package.",
+  },
+  {
+    keywords: ["how can i contact", "contact cloudgenesis", "contact", "email", "reach"],
+    answer: "You can use the Contact Us form on the website or email contactus@cloudgenesis.in.",
+  },
+  {
+    keywords: ["book consultation", "consultation", "book a consultation", "appointment", "talk to"],
+    answer: "You can click the Book a Consultation button or submit the Contact Us form with your requirement.",
+  },
+];
+
 export default {
   async fetch(request, env, ctx) {
-    const corsHeaders = getCorsHeaders(request, env);
+    const url = new URL(request.url);
+    const route = url.pathname.replace(/\/+$/, "") || "/";
+    const isChatRequest = route === "/chat";
+    const corsHeaders = getCorsHeaders(request, env, { allowNoOrigin: isChatRequest });
 
     if (request.method === "OPTIONS") {
       return new Response(null, {
@@ -52,6 +113,11 @@ export default {
 
     try {
       const payload = await readJson(request);
+
+      if (isChatRequest) {
+        return handleChatRequest(payload, corsHeaders);
+      }
+
       const normalized = normalizePayload(payload);
 
       if (normalized.company) {
@@ -109,6 +175,10 @@ export default {
 
       return jsonResponse({ ok: true, message: "Thanks. Your inquiry has been sent." }, 200, corsHeaders);
     } catch (error) {
+      if (isChatRequest) {
+        return jsonResponse({ success: false, error: "Please enter a valid question." }, 400, corsHeaders);
+      }
+
       return jsonResponse(
         { ok: false, message: "We could not send your inquiry right now. Please try again later." },
         500,
@@ -118,7 +188,7 @@ export default {
   },
 };
 
-function getCorsHeaders(request, env) {
+function getCorsHeaders(request, env, options = {}) {
   const origin = request.headers.get("Origin") || "";
   const configuredOrigins = String(env.ALLOWED_ORIGINS || "")
     .split(",")
@@ -126,7 +196,11 @@ function getCorsHeaders(request, env) {
     .filter(Boolean);
   const allowedOrigins = new Set([...DEFAULT_ALLOWED_ORIGINS, ...configuredOrigins]);
 
-  if (!origin || !allowedOrigins.has(origin)) {
+  if (!origin) {
+    return options.allowNoOrigin ? JSON_HEADERS : null;
+  }
+
+  if (!allowedOrigins.has(origin)) {
     return null;
   }
 
@@ -148,6 +222,50 @@ async function readJson(request) {
   }
 
   return JSON.parse(body);
+}
+
+function handleChatRequest(payload, corsHeaders) {
+  const message = normalizeText(payload && payload.message);
+
+  if (!message || message.length > MAX_CHAT_MESSAGE_LENGTH) {
+    return jsonResponse({ success: false, error: "Please enter a valid question." }, 400, corsHeaders);
+  }
+
+  return jsonResponse({
+    success: true,
+    answer: findChatAnswer(message),
+  }, 200, corsHeaders);
+}
+
+function findChatAnswer(message) {
+  const normalized = normalizeChatMessage(message);
+  let bestMatch = null;
+
+  for (const entry of CHAT_FAQ_ENTRIES) {
+    const score = entry.keywords.reduce((total, keyword) => {
+      const normalizedKeyword = normalizeChatMessage(keyword);
+
+      if (!normalized.includes(normalizedKeyword)) {
+        return total;
+      }
+
+      return total + (normalizedKeyword.includes(" ") ? 3 : 1);
+    }, 0);
+
+    if (score > 0 && (!bestMatch || score > bestMatch.score)) {
+      bestMatch = { score, answer: entry.answer };
+    }
+  }
+
+  return bestMatch ? bestMatch.answer : CHAT_FALLBACK_ANSWER;
+}
+
+function normalizeChatMessage(value) {
+  return normalizeText(value)
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 function normalizePayload(payload) {
