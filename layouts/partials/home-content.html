@@ -1,4 +1,16 @@
 <section class="hero-section">
+  {{- $heroBannerPath := "/images/Main_Banner.png" -}}
+  {{- $heroBannerOnePath := "/images/Main_Banner_1.png" -}}
+  {{- $heroBannerTwoPath := "/images/Main_Banner_2.png" -}}
+  {{- with os.Stat "static/images/Main_Banner.png" -}}
+    {{- $heroBannerPath = printf "%s?v=%d" $heroBannerPath .ModTime.Unix -}}
+  {{- end -}}
+  {{- with os.Stat "static/images/Main_Banner_1.png" -}}
+    {{- $heroBannerOnePath = printf "%s?v=%d" $heroBannerOnePath .ModTime.Unix -}}
+  {{- end -}}
+  {{- with os.Stat "static/images/Main_Banner_2.png" -}}
+    {{- $heroBannerTwoPath = printf "%s?v=%d" $heroBannerTwoPath .ModTime.Unix -}}
+  {{- end -}}
   <div class="container hero-layout">
     <div class="hero-copy animate-stagger">
       <p class="section-kicker">Healthcare websites and secure digital platforms</p>
@@ -10,16 +22,66 @@
       </div>
       <span class="hero-note">Built to support secure launches and professional growth.</span>
     </div>
-    <div class="visual-panel visual-panel--hero visual-panel--image">
+    <div
+      class="visual-panel visual-panel--hero visual-panel--image hero-rotator"
+      data-hero-rotator
+      aria-label="CloudGenesis healthcare platform visuals"
+    >
       <img
-        class="visual-panel__image"
-        src="{{ `/images/hero-healthcare-platform.webp` | relURL }}"
-        alt="Abstract healthcare platform visual showing secure web and mobile app interfaces for doctors and clinics."
-        width="1448"
-        height="1086"
+        class="visual-panel__image hero-rotator__image is-active"
+        src="{{ $heroBannerPath | relURL }}"
+        alt="CloudGenesis healthcare technology banner for branded websites, mobile apps, and secure digital platforms."
+        width="1536"
+        height="1024"
         fetchpriority="high"
         decoding="async"
+        data-hero-rotator-image
       >
+      <img
+        class="visual-panel__image hero-rotator__image"
+        src="{{ $heroBannerOnePath | relURL }}"
+        alt="CloudGenesis healthcare platform banner highlighting digital solutions for doctors and clinics."
+        width="1536"
+        height="1024"
+        loading="lazy"
+        decoding="async"
+        aria-hidden="true"
+        data-hero-rotator-image
+      >
+      <img
+        class="visual-panel__image hero-rotator__image"
+        src="{{ $heroBannerTwoPath | relURL }}"
+        alt="CloudGenesis healthcare app and web platform banner for modern medical practices."
+        width="1536"
+        height="1024"
+        loading="lazy"
+        decoding="async"
+        aria-hidden="true"
+        data-hero-rotator-image
+      >
+      <div class="hero-rotator__controls" role="group" aria-label="Choose hero banner">
+        <button
+          class="hero-rotator__control is-active"
+          type="button"
+          aria-label="Show hero banner 1"
+          aria-pressed="true"
+          data-hero-rotator-control
+        ></button>
+        <button
+          class="hero-rotator__control"
+          type="button"
+          aria-label="Show hero banner 2"
+          aria-pressed="false"
+          data-hero-rotator-control
+        ></button>
+        <button
+          class="hero-rotator__control"
+          type="button"
+          aria-label="Show hero banner 3"
+          aria-pressed="false"
+          data-hero-rotator-control
+        ></button>
+      </div>
     </div>
   </div>
 </section>

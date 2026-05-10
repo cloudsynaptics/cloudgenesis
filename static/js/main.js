@@ -60,6 +60,83 @@ document.addEventListener("DOMContentLoaded", () => {
   const contactForms = Array.from(document.querySelectorAll("[data-contact-form]"));
   const pricingCards = Array.from(document.querySelectorAll(".pricing-card"));
   const packagePrefillData = document.querySelector("[data-package-prefill]");
+  const heroRotators = Array.from(document.querySelectorAll("[data-hero-rotator]"));
+
+  heroRotators.forEach((rotator) => {
+    const images = Array.from(rotator.querySelectorAll("[data-hero-rotator-image]"));
+    const controls = Array.from(rotator.querySelectorAll("[data-hero-rotator-control]"));
+
+    if (images.length < 2) {
+      return;
+    }
+
+    let activeIndex = images.findIndex((image) => image.classList.contains("is-active"));
+    activeIndex = activeIndex >= 0 ? activeIndex : 0;
+
+    const setActiveSlide = (nextIndex) => {
+      if (nextIndex === activeIndex || nextIndex < 0 || nextIndex >= images.length) {
+        return;
+      }
+
+      images[activeIndex].classList.remove("is-active");
+      images[activeIndex].setAttribute("aria-hidden", "true");
+      images[nextIndex].classList.add("is-active");
+      images[nextIndex].setAttribute("aria-hidden", "false");
+
+      controls.forEach((control, index) => {
+        const isActive = index === nextIndex;
+        control.classList.toggle("is-active", isActive);
+        control.setAttribute("aria-pressed", String(isActive));
+      });
+
+      activeIndex = nextIndex;
+    };
+
+    let rotationTimer = null;
+    const startRotation = () => {
+      if (rotationTimer === null && !reducedMotionQuery.matches) {
+        rotationTimer = window.setInterval(() => {
+          setActiveSlide((activeIndex + 1) % images.length);
+        }, 10000);
+      }
+    };
+
+    const stopRotation = () => {
+      if (rotationTimer !== null) {
+        window.clearInterval(rotationTimer);
+        rotationTimer = null;
+      }
+    };
+
+    const updateRotation = () => {
+      if (reducedMotionQuery.matches) {
+        stopRotation();
+        return;
+      }
+
+      startRotation();
+    };
+
+    images.forEach((image, index) => {
+      const isActive = index === activeIndex;
+      image.classList.toggle("is-active", isActive);
+      image.setAttribute("aria-hidden", String(!isActive));
+    });
+
+    controls.forEach((control, index) => {
+      const isActive = index === activeIndex;
+      control.classList.toggle("is-active", isActive);
+      control.setAttribute("aria-pressed", String(isActive));
+      control.addEventListener("click", () => {
+        stopRotation();
+        setActiveSlide(index);
+        startRotation();
+      });
+    });
+
+    updateRotation();
+    addMediaQueryChangeListener(reducedMotionQuery, updateRotation);
+  });
 
   pricingCards.forEach((card) => {
     const priceDisplay = card.querySelector("[data-price-display]");

@@ -693,6 +693,70 @@ p {
   padding: 0;
 }
 
+.hero-rotator {
+  isolation: isolate;
+}
+
+.hero-rotator__image {
+  grid-area: 1 / 1;
+  opacity: 0;
+  transition: opacity 700ms var(--ease-soft);
+}
+
+.hero-rotator__image.is-active {
+  opacity: 1;
+  z-index: 1;
+}
+
+.hero-rotator__controls {
+  grid-area: 1 / 1;
+  z-index: 2;
+  align-self: end;
+  justify-self: center;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-bottom: var(--space-3);
+  padding: 0.55rem 0.7rem;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.76);
+  box-shadow: 0 0.7rem 1.6rem rgba(15, 23, 42, 0.14);
+  backdrop-filter: blur(12px);
+}
+
+.hero-rotator__control {
+  width: 0.68rem;
+  height: 0.68rem;
+  padding: 0;
+  border: 1px solid rgba(0, 113, 227, 0.55);
+  border-radius: 999px;
+  background: rgba(0, 113, 227, 0.16);
+  cursor: pointer;
+  transition:
+    transform var(--motion-fast) var(--ease-out),
+    background var(--transition),
+    border-color var(--transition),
+    box-shadow var(--transition);
+}
+
+.hero-rotator__control:hover,
+.hero-rotator__control:focus-visible,
+.hero-rotator__control.is-active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.hero-rotator__control:focus-visible {
+  outline: 3px solid rgba(0, 113, 227, 0.24);
+  outline-offset: 3px;
+}
+
+.hero-rotator__control.is-active {
+  transform: scale(1.25);
+  box-shadow: 0 0 0 0.25rem rgba(0, 113, 227, 0.18);
+}
+
 .visual-panel__image,
 .showcase-media__image,
 .card-image {
@@ -904,6 +968,8 @@ p {
 }
 
 .pricing-card {
+  grid-template-rows: auto auto auto 1fr auto;
+  height: 100%;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   box-shadow: var(--shadow-card);
@@ -996,6 +1062,12 @@ p {
 
 .pricing-card__cta {
   margin-top: auto;
+  justify-self: center;
+  min-height: 2.55rem;
+  padding: 0.58rem 1.05rem;
+  font-size: var(--text-sm);
+  line-height: 1.2;
+  box-shadow: 0 10px 20px rgba(0, 113, 227, 0.18);
 }
 
 .card-icon,
@@ -1401,6 +1473,25 @@ p {
     height: auto;
     min-height: 0;
     object-fit: contain;
+  }
+
+  .hero-rotator {
+    aspect-ratio: 3 / 2;
+  }
+
+  .hero-rotator .visual-panel__image {
+    height: 100%;
+  }
+
+  .hero-rotator__controls {
+    gap: 0.45rem;
+    margin-bottom: 0.75rem;
+    padding: 0.45rem 0.55rem;
+  }
+
+  .hero-rotator__control {
+    width: 0.58rem;
+    height: 0.58rem;
   }
 
   .dashboard-illustration {
