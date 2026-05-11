@@ -52,6 +52,3 @@
     gtag('config', '{{ . }}');
   </script>
 {{ end }}
-{{ with site.Params.turnstileSiteKey }}
-  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" defer></script>
-{{ end }}

@@ -25,6 +25,9 @@
         {{ end }}
       {{ end }}
       <script type="application/json" data-package-prefill>{{ $packagePrefillItems | jsonify | safeJS }}</script>
+      {{ with site.Params.turnstileSiteKey }}
+        <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" defer></script>
+      {{ end }}
       <form
         class="contact-form reveal"
         action="{{ site.Params.contactApiUrl | default `#` }}"
