@@ -20,10 +20,65 @@ const fieldLimits = {
 };
 
 const CHAT_FALLBACK_ANSWER = "I can help with basic questions about CloudGenesis services, healthcare websites, mobile apps, secure platforms, pricing, and Doc AIde. For specific project requirements, please book a consultation or submit the Contact Us form.";
-
 const CHAT_FAQ_ENTRIES = [
   {
-    keywords: ["what is cloudgenesis", "cloudgenesis", "company", "who are you", "about cloudgenesis"],
+    keywords: ["starter website timeline", "starter page timeline", "starter website delivery", "basic website timeline"],
+    answer: "A starter website or starter page usually takes around 2 weeks, depending on content readiness, branding inputs, and approval speed.",
+  },
+  {
+    keywords: ["app development timeline", "mobile app timeline", "android app timeline", "ios app timeline", "how long app development"],
+    answer: "Mobile app development usually takes around 3 weeks for a standard scoped application. The final timeline may vary if the app requires advanced features, integrations, custom workflows, or publishing support.",
+  },
+  {
+    keywords: ["platform timeline", "secure platform timeline", "healthcare platform timeline", "custom software timeline"],
+    answer: "Secure healthcare platforms and custom software products usually take around 3 to 6 weeks depending on the requirement, number of features, integrations, dashboards, user roles, and review cycles.",
+  },
+  {
+    keywords: ["how long", "timeline", "delivery time", "project duration", "when complete", "how many weeks"],
+    answer: "A starter website or starter page usually takes around 2 weeks. Mobile app development usually takes around 3 weeks. Other products and secure healthcare platforms may vary from 3 to 6 weeks depending on the requirement, features, integrations, content readiness, and approval cycles.",
+  },
+  {
+    keywords: ["fast delivery", "quick delivery", "urgent website", "urgent app", "can you deliver fast"],
+    answer: "CloudGenesis can plan phased delivery based on urgency. A starter website can usually be completed in around 2 weeks, while apps and larger platforms require proper planning to maintain quality, security, and reliability.",
+  },
+  {
+    keywords: ["doc aide pricing", "doc aide cost", "doc aide package", "branded app pricing"],
+    answer: "Doc AIde pricing will depend on branding, app features, publishing requirements, integrations, and support needs. Please book a consultation for the right estimate.",
+  },
+  {
+    keywords: ["how much", "website cost", "pricing", "price", "cost", "package", "packages"],
+    answer: "Pricing depends on the scope, number of pages, design complexity, integrations, and platform features. CloudGenesis offers packages for individual doctors, clinics, mobile apps, and secure healthcare platforms.",
+  },
+  {
+    keywords: ["get pricing", "pricing quote", "quote", "estimate"],
+    answer: "You can book a consultation or submit the contact form. CloudGenesis will review your requirement and suggest the right package.",
+  },
+  {
+    keywords: ["free consultation", "initial call", "talk before pricing", "discuss requirement"],
+    answer: "You can submit the Contact Us form or book a consultation to discuss your requirement before finalizing the scope and pricing.",
+  },
+  {
+    keywords: ["doc aide", "doc aide app", "branded app", "app generation", "publishing automation"],
+    answer: "Doc AIde is a future CloudGenesis product concept that helps doctors create branded Android and iOS applications through a self-service portal with custom branding, app generation, and publishing automation.",
+  },
+  {
+    keywords: ["publish app", "app store", "play store", "android publishing", "ios publishing"],
+    answer: "Doc AIde is planned to support branded app generation and publishing automation for Android and iOS apps, based on the final product workflow and requirements.",
+  },
+  {
+    keywords: ["self service portal", "doctor portal", "app portal", "create app online", "portal"],
+    answer: "Doc AIde is planned as a self-service portal where doctors can configure branding and app details for generating branded Android and iOS applications.",
+  },
+  {
+    keywords: ["who do you serve", "target customers", "for doctors", "for clinics", "healthcare businesses", "medical professionals"],
+    answer: "CloudGenesis primarily serves doctors, clinics, healthcare professionals, and healthcare-focused businesses that need professional websites, mobile apps, or secure digital platforms.",
+  },
+  {
+    keywords: ["why cloudgenesis", "why choose cloudgenesis", "benefits", "advantages", "what makes you different"],
+    answer: "CloudGenesis combines premium design, healthcare-focused software expertise, secure-first engineering, and scalable cloud architecture to help healthcare businesses build trusted digital platforms.",
+  },
+  {
+    keywords: ["what is cloudgenesis", "company", "who are you", "about cloudgenesis"],
     answer: "CloudGenesis is a premium software consulting company based in Chennai, India, focused on building modern websites, mobile apps, and secure digital platforms for doctors, clinics, and healthcare-focused businesses.",
   },
   {
@@ -39,12 +94,60 @@ const CHAT_FAQ_ENTRIES = [
     answer: "Yes. CloudGenesis builds premium, responsive, and professional websites for doctors, clinics, hospitals, and healthcare-led businesses.",
   },
   {
+    keywords: ["doctor portfolio", "personal branding", "doctor profile", "medical portfolio", "professional profile"],
+    answer: "Yes. CloudGenesis builds branded doctor portfolio websites that highlight professional background, services, clinic details, contact information, and online presence.",
+  },
+  {
+    keywords: ["premium design", "professional design", "modern design", "corporate design", "website design quality"],
+    answer: "CloudGenesis focuses on clean, modern, premium, and professional design that reflects healthcare credibility and builds trust with patients and customers.",
+  },
+  {
+    keywords: ["responsive website", "mobile friendly", "tablet friendly", "desktop friendly", "all devices"],
+    answer: "Yes. CloudGenesis websites are designed to be responsive and work smoothly across mobile, tablet, and desktop devices.",
+  },
+  {
+    keywords: ["seo", "search engine", "google ranking", "website visibility", "seo basics"],
+    answer: "CloudGenesis can include SEO-friendly website structure, page titles, meta descriptions, responsive design, and performance-focused implementation to improve online visibility.",
+  },
+  {
+    keywords: ["clinic branding", "brand identity", "logo", "branding support", "custom branding"],
+    answer: "CloudGenesis can support custom branding for healthcare websites and apps, including colors, layout, logo placement, content structure, and a professional digital identity.",
+  },
+  {
+    keywords: ["online appointment", "appointment booking", "booking form", "schedule appointment", "patient booking"],
+    answer: "Yes. CloudGenesis can build appointment booking forms and appointment workflow features depending on the clinic or healthcare business requirement.",
+  },
+  {
+    keywords: ["contact form", "lead form", "enquiry form", "inquiry form", "form submission"],
+    answer: "Yes. CloudGenesis websites can include contact forms or enquiry forms to help patients and customers submit their requirements easily.",
+  },
+  {
+    keywords: ["email notification", "form email", "receive enquiry", "contact notification", "lead notification"],
+    answer: "Yes. CloudGenesis can configure form submissions to send email notifications so healthcare businesses can receive enquiries quickly.",
+  },
+  {
+    keywords: ["telegram alert", "sms alert", "notification", "instant alert", "request alert"],
+    answer: "CloudGenesis can support notification options such as email alerts, Telegram alerts, or SMS integrations depending on the project requirement and selected service provider.",
+  },
+  {
+    keywords: ["hosting", "website hosting", "domain", "deploy website", "go live"],
+    answer: "CloudGenesis can help with website deployment, hosting setup, domain configuration, and launch support based on the chosen hosting platform.",
+  },
+  {
+    keywords: ["cloud", "aws", "cloud platform", "cloud deployment", "cloud architecture"],
+    answer: "CloudGenesis can design and build cloud-ready healthcare platforms with scalable architecture, secure deployment practices, and reliable infrastructure planning.",
+  },
+  {
     keywords: ["mobile app", "android", "ios", "app development", "build mobile", "mobile applications"],
     answer: "Yes. CloudGenesis builds Android and iOS applications for healthcare professionals and healthcare-focused businesses.",
   },
   {
     keywords: ["clinic management", "appointment system", "patient portal", "clinic dashboard", "workflow applications", "healthcare platform"],
     answer: "Yes. CloudGenesis can build secure healthcare platforms such as appointment systems, patient portals, clinic dashboards, and healthcare workflow applications based on the business requirement.",
+  },
+  {
+    keywords: ["custom software", "software development", "custom platform", "business application", "custom application"],
+    answer: "Yes. CloudGenesis builds custom software platforms for healthcare-focused businesses based on their workflows, users, integrations, and operational requirements.",
   },
   {
     keywords: ["secure", "security", "healthcare platforms secure", "privacy", "access control", "reliability"],
@@ -55,16 +158,72 @@ const CHAT_FAQ_ENTRIES = [
     answer: "Yes. CloudGenesis designs healthcare platforms with privacy, security, and compliance-minded architecture from the beginning.",
   },
   {
-    keywords: ["doc aide", "doc aide app", "branded app", "app generation", "publishing automation"],
-    answer: "Doc AIde is a future CloudGenesis product concept that helps doctors create branded Android and iOS applications through a self-service portal with custom branding, app generation, and publishing automation.",
+    keywords: ["patient data", "medical records", "health records", "sensitive data", "data handling"],
+    answer: "For platforms involving patient or sensitive healthcare data, CloudGenesis recommends secure architecture, proper access control, encryption, privacy-aware workflows, and careful compliance planning.",
   },
   {
-    keywords: ["how much", "website cost", "pricing", "price", "cost", "package", "packages"],
-    answer: "Pricing depends on the scope, number of pages, design complexity, integrations, and platform features. CloudGenesis offers packages for individual doctors, clinics, and secure healthcare platforms.",
+    keywords: ["hipaa", "gdpr", "fedramp", "certified", "certification"],
+    answer: "CloudGenesis designs solutions with HIPAA, GDPR, and FedRAMP-aligned security principles where relevant. This does not imply formal certification unless explicitly stated in a project agreement.",
   },
   {
-    keywords: ["get pricing", "pricing quote", "quote", "estimate"],
-    answer: "You can book a consultation or submit the contact form. CloudGenesis will review your requirement and suggest the right package.",
+    keywords: ["data leakage", "secure data", "data protection", "protect data", "confidentiality"],
+    answer: "CloudGenesis follows a secure-first approach that focuses on privacy, controlled access, secure workflows, and reducing the risk of data exposure.",
+  },
+  {
+    keywords: ["login", "authentication", "user login", "secure login", "role based access"],
+    answer: "Yes. CloudGenesis can build secure login systems, role-based access, admin dashboards, and user-specific access flows depending on the platform requirement.",
+  },
+  {
+    keywords: ["admin dashboard", "dashboard", "clinic admin", "doctor dashboard", "management dashboard"],
+    answer: "Yes. CloudGenesis can build admin dashboards for managing content, enquiries, appointments, users, and operational workflows depending on the solution scope.",
+  },
+  {
+    keywords: ["integrations", "third party", "api", "payment gateway", "whatsapp integration"],
+    answer: "CloudGenesis can support third-party integrations such as APIs, payment gateways, messaging tools, analytics, notifications, and workflow systems based on project needs.",
+  },
+  {
+    keywords: ["analytics", "website analytics", "visitors", "page views", "tracking"],
+    answer: "CloudGenesis can help configure analytics tools so businesses can understand website visits, user behavior, traffic sources, and enquiry performance.",
+  },
+  {
+    keywords: ["ai", "ai enabled", "ai healthcare", "artificial intelligence", "ai features"],
+    answer: "CloudGenesis can support AI-enabled healthcare digital solution ideas depending on the use case, data sensitivity, workflow, and business requirement.",
+  },
+  {
+    keywords: ["chatbot", "chat bot", "faq bot", "website assistant", "basic questions"],
+    answer: "Yes. CloudGenesis websites can include a basic chatbot or FAQ assistant to answer common questions about services, contact, pricing, timelines, and business information.",
+  },
+  {
+    keywords: ["maintenance", "support", "after launch", "post launch", "website updates"],
+    answer: "CloudGenesis can provide post-launch support, maintenance, updates, and enhancement services based on the project scope or support plan.",
+  },
+  {
+    keywords: ["content writing", "website content", "copywriting", "content support", "page content"],
+    answer: "CloudGenesis can help structure professional website content for healthcare services, doctor profiles, clinic pages, service pages, and business positioning.",
+  },
+  {
+    keywords: ["process", "how it works", "development process", "project steps", "workflow"],
+    answer: "CloudGenesis follows a structured approach: discovery, requirement analysis, design, development, review, testing, launch, and post-launch support.",
+  },
+  {
+    keywords: ["discovery call", "requirement discussion", "requirements", "initial discussion", "project discussion"],
+    answer: "CloudGenesis begins with a requirement discussion to understand your goals, target users, features, branding needs, and the right solution approach.",
+  },
+  {
+    keywords: ["portfolio", "case studies", "projects", "past work", "examples"],
+    answer: "CloudGenesis showcases healthcare-focused digital solution concepts and portfolio highlights such as Doc AIde, secure healthcare platforms, and professional website experiences.",
+  },
+  {
+    keywords: ["small clinic", "individual doctor", "solo doctor", "single doctor", "starter"],
+    answer: "Yes. CloudGenesis can support individual doctors and small clinics with starter websites, professional portfolios, appointment forms, and basic digital presence packages.",
+  },
+  {
+    keywords: ["hospital", "multi clinic", "clinic chain", "large healthcare", "enterprise healthcare"],
+    answer: "Yes. CloudGenesis can support larger healthcare businesses with scalable platforms, multi-page websites, dashboards, integrations, and secure cloud-ready architecture.",
+  },
+  {
+    keywords: ["upgrade later", "scale later", "future features", "add features", "phase wise"],
+    answer: "Yes. CloudGenesis can build solutions in phases so you can start with a website or basic platform and later add apps, dashboards, integrations, or advanced workflows.",
   },
   {
     keywords: ["how can i contact", "contact cloudgenesis", "contact", "email", "reach"],
@@ -75,6 +234,61 @@ const CHAT_FAQ_ENTRIES = [
     answer: "You can click the Book a Consultation button or submit the Contact Us form with your requirement.",
   },
 ];
+
+// const CHAT_FAQ_ENTRIES = [
+//   {
+//     keywords: ["what is cloudgenesis", "cloudgenesis", "company", "who are you", "about cloudgenesis"],
+//     answer: "CloudGenesis is a premium software consulting company based in Chennai, India, focused on building modern websites, mobile apps, and secure digital platforms for doctors, clinics, and healthcare-focused businesses.",
+//   },
+//   {
+//     keywords: ["where is cloudgenesis", "location", "located", "chennai", "india", "based"],
+//     answer: "CloudGenesis is based in Chennai, India, and serves healthcare professionals across India, with future support for global healthcare-focused businesses.",
+//   },
+//   {
+//     keywords: ["what services", "services", "offer", "development", "healthcare digital solutions", "cloud consulting"],
+//     answer: "CloudGenesis offers healthcare website development, doctor portfolio websites, clinic websites, mobile app development, secure healthcare platforms, cloud consulting, and AI-enabled healthcare digital solutions.",
+//   },
+//   {
+//     keywords: ["doctor website", "clinic website", "websites for doctors", "build websites", "website", "hospital website"],
+//     answer: "Yes. CloudGenesis builds premium, responsive, and professional websites for doctors, clinics, hospitals, and healthcare-led businesses.",
+//   },
+//   {
+//     keywords: ["mobile app", "android", "ios", "app development", "build mobile", "mobile applications"],
+//     answer: "Yes. CloudGenesis builds Android and iOS applications for healthcare professionals and healthcare-focused businesses.",
+//   },
+//   {
+//     keywords: ["clinic management", "appointment system", "patient portal", "clinic dashboard", "workflow applications", "healthcare platform"],
+//     answer: "Yes. CloudGenesis can build secure healthcare platforms such as appointment systems, patient portals, clinic dashboards, and healthcare workflow applications based on the business requirement.",
+//   },
+//   {
+//     keywords: ["secure", "security", "healthcare platforms secure", "privacy", "access control", "reliability"],
+//     answer: "Yes. CloudGenesis follows a secure-first engineering approach with strong focus on privacy, access control, scalable architecture, and healthcare-grade reliability.",
+//   },
+//   {
+//     keywords: ["healthcare data privacy", "data privacy", "compliance", "compliance-minded", "privacy support"],
+//     answer: "Yes. CloudGenesis designs healthcare platforms with privacy, security, and compliance-minded architecture from the beginning.",
+//   },
+//   {
+//     keywords: ["doc aide", "doc aide app", "branded app", "app generation", "publishing automation"],
+//     answer: "Doc AIde is a future CloudGenesis product concept that helps doctors create branded Android and iOS applications through a self-service portal with custom branding, app generation, and publishing automation.",
+//   },
+//   {
+//     keywords: ["how much", "website cost", "pricing", "price", "cost", "package", "packages"],
+//     answer: "Pricing depends on the scope, number of pages, design complexity, integrations, and platform features. CloudGenesis offers packages for individual doctors, clinics, and secure healthcare platforms.",
+//   },
+//   {
+//     keywords: ["get pricing", "pricing quote", "quote", "estimate"],
+//     answer: "You can book a consultation or submit the contact form. CloudGenesis will review your requirement and suggest the right package.",
+//   },
+//   {
+//     keywords: ["how can i contact", "contact cloudgenesis", "contact", "email", "reach"],
+//     answer: "You can use the Contact Us form on the website or email contactus@cloudgenesis.in.",
+//   },
+//   {
+//     keywords: ["book consultation", "consultation", "book a consultation", "appointment", "talk to"],
+//     answer: "You can click the Book a Consultation button or submit the Contact Us form with your requirement.",
+//   },
+// ];
 
 export default {
   async fetch(request, env, ctx) {

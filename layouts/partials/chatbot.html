@@ -40,7 +40,12 @@
           autocomplete="off"
           placeholder="Type your question"
           data-chatbot-input>
-        <button class="btn btn-primary chatbot__send" type="submit">Send</button>
+        <button class="chatbot__send" type="submit" aria-label="Send">
+          <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+            <path d="M12 19V5" />
+            <path d="m5 12 7-7 7 7" />
+          </svg>
+        </button>
       </form>
       <p class="chatbot__status" data-chatbot-status role="status" aria-live="polite"></p>
     </section>
