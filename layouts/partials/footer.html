@@ -23,6 +23,7 @@
         {{ range site.Menus.main }}
           <li><a href="{{ .URL | relURL }}">{{ .Name }}</a></li>
         {{ end }}
+        <li><a href="{{ `/privacy-policy/` | relURL }}">Privacy Policy</a></li>
       </ul>
     </nav>
     {{ if gt (len $contactLinks) 0 }}

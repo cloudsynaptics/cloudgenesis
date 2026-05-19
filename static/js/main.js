@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
   document.body.classList.add("is-ready");
 
+  const privacyConsent = document.querySelector("[data-privacy-consent]");
+  const privacyConsentAccept = document.querySelector("[data-privacy-consent-accept]");
   const toggle = document.querySelector("[data-nav-toggle]");
   const panel = document.querySelector("[data-nav-panel]");
   const desktopQuery = window.matchMedia("(min-width: 64rem)");
@@ -17,6 +19,31 @@ document.addEventListener("DOMContentLoaded", () => {
       query.addListener(callback);
     }
   };
+
+  if (privacyConsent && privacyConsentAccept) {
+    const storageKey = "cloudgenesisPrivacyPolicyAccepted";
+    let hasAcceptedPrivacy = false;
+
+    try {
+      hasAcceptedPrivacy = window.localStorage.getItem(storageKey) === "true";
+    } catch (error) {
+      hasAcceptedPrivacy = false;
+    }
+
+    if (!hasAcceptedPrivacy) {
+      privacyConsent.hidden = false;
+    }
+
+    privacyConsentAccept.addEventListener("click", () => {
+      try {
+        window.localStorage.setItem(storageKey, "true");
+      } catch (error) {
+        // If storage is unavailable, accepting still dismisses the notice for this page view.
+      }
+
+      privacyConsent.hidden = true;
+    });
+  }
 
   const showRevealItems = () => {
     document.body.classList.remove("reveal-enabled");

@@ -12,6 +12,7 @@
     {{ partial "footer.html" . }}
     {{ partial "intro-video.html" . }}
     {{ partial "chatbot.html" . }}
+    {{ partial "privacy-consent.html" . }}
     {{ $mainScriptVersion := readFile "static/js/main.js" | sha256 }}
     <script src="{{ printf `js/main.js?v=%s` $mainScriptVersion | relURL }}" defer></script>
   </body>

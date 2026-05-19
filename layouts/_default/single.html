@@ -1,7 +1,7 @@
 {{ define "main" }}
   {{ partial "page-header.html" . }}
-  <article class="section">
-    <div class="container prose-block">
+  <article class="section{{ if eq .Section `privacy-policy` }} policy-page{{ end }}">
+    <div class="container prose-block{{ if eq .Section `privacy-policy` }} policy-page__content{{ end }}">
       {{ .Content }}
     </div>
   </article>
