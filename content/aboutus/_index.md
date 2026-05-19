@@ -2,7 +2,7 @@
 title = "About CloudGenesis Healthcare Technology"
 description = "Learn how CloudGenesis helps doctors, clinics, and healthcare businesses build secure websites, mobile apps, and digital platforms."
 page_header_class = "page-header--wide"
-lead = "CloudGenesis is a software consulting company dedicated to helping doctors, clinics, and healthcare-led businesses build a strong digital presence. We design and develop modern websites, mobile applications, and secure digital platforms that are professional, scalable, and easy to use. Our focus is on combining healthcare understanding with reliable technology, clean design, and practical implementation."
+lead = "CloudGenesis helps doctors, clinics, and healthcare-led businesses build a strong digital presence with modern websites, mobile applications, and secure digital platforms."
 intro_title = "Who We Are"
 intro_text = "Based in Chennai, India, CloudGenesis helps healthcare professionals establish a trusted digital presence and adopt secure, scalable technology without complexity. We serve India first and build solutions suitable for global healthcare professionals."
 mission_title = "Our Mission"
@@ -33,4 +33,6 @@ title = "India First, Global Ready"
 description = "Based in Chennai and serving India first, we build solutions architected for global healthcare professionals and international best practices."
 +++
 
-CloudGenesis combines healthcare technology expertise, refined digital design, and secure platform engineering to create dependable solutions for modern healthcare needs. We collaborate closely with doctors, clinics, and healthcare businesses to deliver trusted, scalable digital products built for performance, credibility, and long-term growth in a constantly evolving healthcare environment.
+We combine healthcare technology expertise, refined digital design, and secure platform engineering to create dependable solutions for modern healthcare needs.
+
+Our team collaborates closely with doctors, clinics, and healthcare businesses to deliver trusted digital products built for performance, credibility, and long-term growth.

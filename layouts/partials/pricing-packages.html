@@ -10,9 +10,9 @@
         {{ end }}
       </div>
     {{ end }}
-    <div class="pricing-grid">
+    <div class="pricing-grid cg-bento-grid">
       {{ range $index, $package := .packages }}
-        <article class="pricing-card reveal" data-reveal-delay="{{ mod $index 3 }}">
+        <article class="pricing-card cg-card cg-hover-lift reveal" data-reveal-delay="{{ mod $index 3 }}">
           {{ with $package.ribbon }}
             <span class="pricing-card__ribbon{{ with $package.ribbon_tone }} pricing-card__ribbon--{{ . }}{{ end }}" aria-label="{{ . }} package">{{ . }}</span>
           {{ end }}

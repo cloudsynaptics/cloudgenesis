@@ -1,16 +1,21 @@
 {{ define "main" }}
   {{ partial "page-header.html" . }}
 
-  <section class="section">
+  <section class="section section-services">
     <div class="container">
       <div class="section-heading reveal">
         <p class="section-kicker">Professional software consulting services</p>
         <h2>Healthcare websites, apps, and digital platforms</h2>
-        <p class="section-lead">We help doctors, clinics, and healthcare-led businesses create reliable digital products that look professional, function smoothly, and support patient engagement. Our services combine clean design and security-focused development to deliver solutions that are easy to manage and built for real-world healthcare needs.Explore the core digital services CloudGenesis offers for healthcare teams, clinics, and product-led practices.</p>
+        <p class="section-lead">{{ .Params.services_intro }}</p>
+        <ul class="services-focus-list" aria-label="Service focus areas">
+          <li>Professional healthcare websites</li>
+          <li>Patient-friendly mobile experiences</li>
+          <li>Secure custom platforms</li>
+        </ul>
       </div>
-      <div class="card-grid">
+      <div class="card-grid cg-bento-grid">
         {{ range $index, $service := .Params.services }}
-          <article class="card reveal" data-reveal-delay="{{ mod $index 4 }}">
+          <article class="card cg-card cg-hover-lift reveal" data-reveal-delay="{{ mod $index 4 }}">
             <span class="card-icon" aria-hidden="true">
               {{ with $service.icon_path }}
                 <img src="{{ . | relURL }}" alt="" loading="lazy" decoding="async">
@@ -33,9 +38,9 @@
         <h2>{{ .Params.process_title }}</h2>
         <p class="section-lead">{{ .Params.process_text }}</p>
       </div>
-      <div class="process-grid">
+      <div class="process-grid cg-bento-grid">
         {{ range $index, $step := .Params.process_steps }}
-          <article class="process-step reveal" data-reveal-delay="{{ mod $index 4 }}">
+          <article class="process-step cg-card cg-card-soft cg-hover-lift reveal" data-reveal-delay="{{ mod $index 4 }}">
             <span class="process-step__number">{{ add $index 1 }}</span>
             <h3>{{ $step.title }}</h3>
             <p>{{ $step.description }}</p>

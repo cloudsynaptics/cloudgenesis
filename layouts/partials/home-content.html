@@ -126,9 +126,9 @@
       <h2>The essential services for healthcare digital transformation</h2>
       <p class="section-lead">{{ .Params.overview_text }}</p>
     </div>
-    <div class="card-grid">
+    <div class="card-grid cg-bento-grid">
       {{ range $index, $service := .Params.services }}
-        <article class="card reveal" data-reveal-delay="{{ mod $index 4 }}">
+        <article class="card cg-card cg-hover-lift reveal" data-reveal-delay="{{ mod $index 4 }}">
           <span class="card-icon" aria-hidden="true">{{ $service.label }}</span>
           <h3>{{ $service.title }}</h3>
           <p>{{ $service.description }}</p>
@@ -199,9 +199,9 @@
       <h2>Trusted by those you trust</h2>
       <p class="section-lead">{{ .Params.value_text }}</p>
     </div>
-    <div class="testimonial-grid">
+    <div class="testimonial-grid cg-bento-grid">
       {{ range $index, $point := .Params.value_points }}
-        <article class="testimonial reveal" data-reveal-delay="{{ mod $index 3 }}">
+        <article class="testimonial cg-card cg-hover-lift reveal" data-reveal-delay="{{ mod $index 3 }}">
           <p>{{ $point.description }}</p>
           <div class="testimonial__author">
             <strong>{{ $point.title }}</strong>
@@ -219,21 +219,21 @@
       <h2>Works with healthcare platforms and tools your practice uses</h2>
       <p class="section-lead">CloudGenesis integrates with the systems and services you rely on.</p>
     </div>
-    <ul class="tool-grid" aria-hidden="true">
-      <li class="tool-item reveal" data-reveal-delay="0">Healthcare Platforms</li>
-      <li class="tool-item reveal" data-reveal-delay="1">Clinic Tools</li>
-      <li class="tool-item reveal" data-reveal-delay="2">Patient Engagement</li>
-      <li class="tool-item reveal" data-reveal-delay="3">Data Security</li>
-      <li class="tool-item reveal" data-reveal-delay="0">API Integrations</li>
-      <li class="tool-item reveal" data-reveal-delay="1">App Publishing</li>
-      <li class="tool-item reveal" data-reveal-delay="2">Custom Solutions</li>
-      <li class="tool-item reveal" data-reveal-delay="3">Support Services</li>
+    <ul class="tool-grid cg-bento-grid" aria-hidden="true">
+      <li class="tool-item cg-card cg-card-soft cg-hover-lift reveal" data-reveal-delay="0">Healthcare Platforms</li>
+      <li class="tool-item cg-card cg-card-soft cg-hover-lift reveal" data-reveal-delay="1">Clinic Tools</li>
+      <li class="tool-item cg-card cg-card-soft cg-hover-lift reveal" data-reveal-delay="2">Patient Engagement</li>
+      <li class="tool-item cg-card cg-card-soft cg-hover-lift reveal" data-reveal-delay="3">Data Security</li>
+      <li class="tool-item cg-card cg-card-soft cg-hover-lift reveal" data-reveal-delay="0">API Integrations</li>
+      <li class="tool-item cg-card cg-card-soft cg-hover-lift reveal" data-reveal-delay="1">App Publishing</li>
+      <li class="tool-item cg-card cg-card-soft cg-hover-lift reveal" data-reveal-delay="2">Custom Solutions</li>
+      <li class="tool-item cg-card cg-card-soft cg-hover-lift reveal" data-reveal-delay="3">Support Services</li>
     </ul>
   </div>
 </section>
 
 <section class="section">
-  <div class="container cta-band reveal">
+  <div class="container cta-band cg-card-soft reveal">
     <div>
       <p class="section-kicker">Ready to get started?</p>
       <h2>Ready to build your digital healthcare platform?</h2>

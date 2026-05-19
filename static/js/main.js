@@ -243,6 +243,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const input = chatbot.querySelector("[data-chatbot-input]");
     const messages = chatbot.querySelector("[data-chatbot-messages]");
     const status = chatbot.querySelector("[data-chatbot-status]");
+    const suggestionButtons = Array.from(chatbot.querySelectorAll("[data-chatbot-suggestion]"));
     const sendButton = form ? form.querySelector("button[type='submit']") : null;
 
     if (!endpoint || !toggleButton || !panel || !form || !input || !messages || !sendButton) {
@@ -327,10 +328,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
 
-    form.addEventListener("submit", async (event) => {
-      event.preventDefault();
-      const message = input.value.trim();
-
+    const sendChatMessage = async (message) => {
       if (!message || message.length > 500) {
         setChatStatus("Please enter a valid question up to 500 characters.", "error");
         input.focus();
@@ -341,6 +339,9 @@ document.addEventListener("DOMContentLoaded", () => {
       input.value = "";
       input.disabled = true;
       sendButton.disabled = true;
+      suggestionButtons.forEach((button) => {
+        button.disabled = true;
+      });
       setChatStatus("");
       const loadingMessage = appendTypingIndicator();
 
@@ -371,8 +372,26 @@ document.addEventListener("DOMContentLoaded", () => {
       } finally {
         input.disabled = false;
         sendButton.disabled = false;
+        suggestionButtons.forEach((button) => {
+          button.disabled = false;
+        });
         input.focus();
       }
+    };
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      await sendChatMessage(input.value.trim());
+    });
+
+    suggestionButtons.forEach((button) => {
+      button.addEventListener("click", async () => {
+        if (input.disabled) {
+          return;
+        }
+
+        await sendChatMessage(String(button.dataset.chatbotSuggestion || "").trim());
+      });
     });
 
     document.addEventListener("keydown", (event) => {

@@ -3,9 +3,9 @@
 
   <section class="section">
     <div class="container">
-      <div class="card-grid">
+      <div class="card-grid cg-bento-grid">
         {{ range $index, $project := .Params.projects }}
-          <article class="card card--project reveal" data-reveal-delay="{{ mod $index 4 }}">
+          <article class="card card--project cg-card cg-hover-lift reveal" data-reveal-delay="{{ mod $index 4 }}">
             {{ with $project.image_path }}
               <img
                 class="card-image"

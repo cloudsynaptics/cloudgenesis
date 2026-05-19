@@ -11,7 +11,7 @@
     </button>
 
     <section
-      class="chatbot__panel"
+      class="chatbot__panel cg-card cg-card-soft"
       id="cloudgenesis-assistant-panel"
       aria-label="CloudGenesis Assistant"
       data-chatbot-panel
@@ -28,6 +28,14 @@
 
       <div class="chatbot__messages" data-chatbot-messages aria-live="polite" aria-label="Chat messages">
         <p class="chatbot__message chatbot__message--bot">Hello. Ask me about CloudGenesis services, healthcare websites, mobile apps, secure platforms, pricing, or Doc AIde.</p>
+      </div>
+
+      <div class="chatbot__suggestions" aria-label="Suggested questions">
+        <button type="button" data-chatbot-suggestion="What are your pricing packages?">Pricing</button>
+        <button type="button" data-chatbot-suggestion="How long does a project take?">Timeline</button>
+        <button type="button" data-chatbot-suggestion="How can I contact CloudGenesis?">Contact</button>
+        <button type="button" data-chatbot-suggestion="What services do you offer?">Services</button>
+        <button type="button" data-chatbot-suggestion="What is Doc AIde?">Doc AIde</button>
       </div>
 
       <form class="chatbot__form" data-chatbot-form>
